@@ -72,16 +72,15 @@
           </div>
           <p class="microcopy">Gratis e senza registrazione · quasi <strong>5.000 fontanelle</strong> già sulla mappa, si parte da Brescia.</p>
         </div>
-        <div class="hero-art reveal" aria-hidden="true">
+        <div class="hero-art reveal">
           <div class="phone">
             <div class="phone-screen">
-              <div class="map-bg">
-                <span class="street s1"></span><span class="street s2"></span><span class="street s3"></span><span class="street s4"></span>
-                <span class="pin pin1"></span><span class="pin pin2"></span><span class="pin pin3"></span><span class="pin pin4"></span>
-                <span class="me"></span>
-              </div>
-              <div class="map-chip">💧 3 fontanelle entro 200 m</div>
+              <img class="map-shot" src="app-map.png" alt="La mappa di BeviQui con le fontanelle d'acqua potabile vicino a te" width="300" height="640" loading="eager" />
             </div>
+          </div>
+          <div class="hero-count">
+            <span class="hc-num" id="fountCount" data-base="4975">4.975</span>
+            <span class="hc-label">fontanelle già sulla mappa · cresce ogni giorno</span>
           </div>
         </div>
       </div>
@@ -291,6 +290,23 @@
       if (navigator.share) navigator.share(data).catch(function () {});
       else { navigator.clipboard && navigator.clipboard.writeText(location.href); sb.querySelector('p').textContent = 'Link copiato!'; }
     });
+
+    // Contatore fontanelle SOTTO il mockup: base (dataset Brescia) + community LIVE da Supabase.
+    (function () {
+      var el = document.getElementById('fountCount');
+      if (!el) return;
+      var base = parseInt(el.getAttribute('data-base'), 10) || 4975;
+      el.textContent = base.toLocaleString('it-IT');
+      try {
+        var SB = 'https://waxzrmlspgpuxvftzkvd.supabase.co';
+        var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndheHpybWxzcGdwdXh2ZnR6a3ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5Mjc5MjksImV4cCI6MjA5NjUwMzkyOX0.J4vSIKgqDTjAQpSJb81kGD1Yhdrp0eyo_4y3yNcgiX0';
+        fetch(SB + '/rest/v1/fountains?select=id', { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, Prefer: 'count=exact', Range: '0-0' } })
+          .then(function (r) {
+            var cr = r.headers.get('content-range'); var tot = cr ? parseInt(cr.split('/')[1], 10) : NaN;
+            if (!isNaN(tot)) el.textContent = (base + tot).toLocaleString('it-IT');
+          }).catch(function () {});
+      } catch (e) {}
+    })();
   </script>
 </body>
 </html>

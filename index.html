@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BeviQui — L'acqua buona è qui. Sempre.</title>
+  <meta name="description" content="BeviQui ti mostra sulla mappa le fontanelle e le case dell'acqua più vicine a te. Riempi la borraccia gratis, ovunque sei. Meno plastica, più leggerezza." />
+  <meta property="og:title" content="BeviQui — L'acqua buona è qui. Sempre." />
+  <meta property="og:description" content="Le fontanelle di acqua potabile pubbliche, sulla mappa. Gratis, senza registrazione. Meno plastica, più leggerezza." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://beviqui.it/" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:site_name" content="BeviQui" />
+  <meta property="og:image" content="https://beviqui.it/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BeviQui — L'acqua buona è qui. Sempre." />
+  <meta name="twitter:description" content="Le fontanelle di acqua potabile pubbliche, sulla mappa. Gratis, senza registrazione." />
+  <meta name="twitter:image" content="https://beviqui.it/og-image.png" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#096B85" />
+  <link rel="canonical" href="https://beviqui.it/" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"WebSite","name":"BeviQui","url":"https://beviqui.it/","inLanguage":"it-IT","description":"BeviQui mostra sulla mappa le fontanelle e le case dell'acqua potabile pubbliche più vicine a te. Gratis, senza registrazione."},
+    {"@type":"MobileApplication","name":"BeviQui","operatingSystem":"iOS, Android","applicationCategory":"TravelApplication","inLanguage":"it-IT","url":"https://beviqui.it/","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"description":"App gratuita per trovare fontanelle e case dell'acqua potabile pubbliche vicino a te, su mappa, con indicazioni. Aggiungi quelle mancanti: community e AI le verificano. Si parte da Brescia."}
+  ]}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- SVG sprite (icone) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-10.5A6.5 6.5 0 0 1 12 4a6.5 6.5 0 0 1 6.5 6.5C18.5 15.4 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="10.5" r="2.4" fill="currentColor"/></symbol>
+      <symbol id="i-gps" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor"/><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+      <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.3 6 10.5a6 6 0 1 1-12 0C6 9.3 12 3 12 3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 6-13 14-13 0 8-5 14-13 14-1 0-1-1-1-1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 15c2-2 5-4 8-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+      <symbol id="i-feather" viewBox="0 0 24 24"><path d="M20 4C11 4 6 9 5 18l-1 2M9 16h7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M20 4c-2 7-6 11-12 12" stroke="currentColor" stroke-width="1.7" fill="none"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+      <symbol id="i-hands" viewBox="0 0 24 24"><path d="M12 21s-7-4-7-9a3.5 3.5 0 0 1 7-1 3.5 3.5 0 0 1 7 1c0 5-7 9-7 9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.4" fill="currentColor"/><circle cx="6" cy="12" r="2.4" fill="currentColor"/><circle cx="18" cy="19" r="2.4" fill="currentColor"/><path d="M8 11l8-5M8 13l8 5" stroke="currentColor" stroke-width="1.7"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="nav" id="nav">
+    <div class="wrap nav-row">
+      <a class="brand" href="#top" aria-label="BeviQui">
+        <span class="brand-drop" aria-hidden="true">
+          <svg viewBox="0 0 32 36" width="26" height="29"><path d="M16 2s12 12.5 12 21a12 12 0 1 1-24 0C4 14.5 16 2 16 2z" fill="#096B85"/><circle cx="12" cy="22" r="1.6" fill="#fff"/><circle cx="20" cy="22" r="1.6" fill="#fff"/><path d="M12 26c1.2 1.4 6.8 1.4 8 0" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+        </span>
+        <span class="brand-name">Bevi<span>Qui</span></span>
+      </a>
+      <a class="btn btn-primary btn-sm" href="#prova">Provala gratis</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-text reveal">
+          <span class="eyebrow">Acqua potabile pubblica · gratis</span>
+          <h1>L'acqua buona è qui.<br /><span class="grad">Sempre.</span></h1>
+          <p class="lead">BeviQui ti mostra sulla mappa le <strong>fontanelle</strong> e le <strong>case dell'acqua</strong> più vicine a te. Riempi la borraccia gratis, ovunque sei. Meno plastica, più leggerezza.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#prova">Provala gratis</a>
+            <a class="btn btn-ghost" href="#lista">Entra nella lista d'attesa</a>
+          </div>
+          <p class="microcopy">Gratis e senza registrazione · quasi <strong>5.000 fontanelle</strong> già sulla mappa, si parte da Brescia.</p>
+        </div>
+        <div class="hero-art reveal" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="map-bg">
+                <span class="street s1"></span><span class="street s2"></span><span class="street s3"></span><span class="street s4"></span>
+                <span class="pin pin1"></span><span class="pin pin2"></span><span class="pin pin3"></span><span class="pin pin4"></span>
+                <span class="me"></span>
+              </div>
+              <div class="map-chip">💧 3 fontanelle entro 200 m</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wave"><svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/></svg></div>
+    </section>
+
+    <!-- PROBLEMA -->
+    <section class="section">
+      <div class="wrap narrow center reveal">
+        <h2>Quante bottigliette hai comprato solo perché avevi sete?</h2>
+        <p class="big">Sei in giro, hai sete, e finisci per pagare l'ennesima bottiglietta di plastica. Eppure l'acqua buona è proprio lì, gratis, a due passi da te. Solo che non sai dove. <strong>BeviQui te lo dice.</strong></p>
+      </div>
+    </section>
+
+    <!-- COME FUNZIONA -->
+    <section class="section section-soft">
+      <div class="wrap">
+        <h2 class="center">Come funziona</h2>
+        <p class="center sub">Bastano 3 passi. Niente account, niente complicazioni.</p>
+        <div class="steps">
+          <div class="card step reveal">
+            <span class="ico-circle"><svg class="ico"><use href="#i-pin"/></svg></span>
+            <span class="step-n">1</span>
+            <h3>Apri la mappa</h3>
+            <p>Vedi all'istante tutte le fontanelle e le case dell'acqua intorno a te.</p>
+          </div>
+          <div class="card step reveal">
+            <span class="ico-circle"><svg class="ico"><use href="#i-gps"/></svg></span>
+            <span class="step-n">2</span>
+            <h3>Scegli la più vicina</h3>
+            <p>Attiva il GPS e raggiungila con le indicazioni stradali.</p>
+          </div>
+          <div class="card step reveal">
+            <span class="ico-circle"><svg class="ico"><use href="#i-drop"/></svg></span>
+            <span class="step-n">3</span>
+            <h3>Riempi e bevi</h3>
+            <p>Acqua pubblica, buona e gratuita. Riparti più leggero.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERCHE -->
+    <section class="section">
+      <div class="wrap">
+        <h2 class="center">Più di un'app. Un modo nuovo di stare in giro.</h2>
+        <div class="benefits">
+          <div class="benefit reveal"><span class="ico-circle sm"><svg class="ico"><use href="#i-leaf"/></svg></span><div><h3>Meno plastica</h3><p>Ogni borraccia riempita è una bottiglietta in meno nell'ambiente.</p></div></div>
+          <div class="benefit reveal"><span class="ico-circle sm"><svg class="ico"><use href="#i-feather"/></svg></span><div><h3>Più leggeri</h3><p>Esci senza portarti dietro l'acqua: la trovi quando ti serve.</p></div></div>
+          <div class="benefit reveal"><span class="ico-circle sm"><svg class="ico"><use href="#i-shield"/></svg></span><div><h3>Sempre tranquillo</h3><p>Cammini, corri, giri con i bambini o sei turista: l'acqua buona la trovi sempre.</p></div></div>
+          <div class="benefit reveal"><span class="ico-circle sm"><svg class="ico"><use href="#i-hands"/></svg></span><div><h3>Un bene di tutti</h3><p>L'acqua pubblica è di tutti noi. BeviQui ce lo ricorda, una fontanella alla volta.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROVA / QR -->
+    <section id="prova" class="section section-teal">
+      <div class="wrap prova-grid">
+        <div class="reveal">
+          <h2>Provala adesso. È gratis.</h2>
+          <p class="lead-light">BeviQui sta arrivando su iPhone e Android, ora in beta. <strong>Inquadra il QR</strong> con la fotocamera del telefono e inizia subito a trovare l'acqua intorno a te.</p>
+          <p class="microcopy light">Nessuna registrazione obbligatoria. Apri e usi tutto.</p>
+          <div class="badges">
+            <a class="badge" href="https://testflight.apple.com/join/uyCJ8XD7"> iPhone — beta</a>
+            <span class="badge badge-soon">Android — in arrivo</span>
+          </div>
+        </div>
+        <div class="qr-wrap reveal">
+          <div class="qr-card">
+            <img src="qr-beviqui.png" alt="Codice QR per provare BeviQui" width="200" height="200" />
+            <span class="qr-label">Inquadra per provare</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section class="section section-soft">
+      <div class="wrap narrow center">
+        <h2 class="reveal">La mappa cresce con te</h2>
+        <p class="big reveal">Conosci una fontanella che non c'è ancora? Aggiungila con una <strong>"Scoperta BeviQui"</strong> e falla esistere per tutti. Segnala se funziona, se è chiusa o se ha bisogno di una mano. Insieme teniamo viva la mappa dell'acqua pubblica d'Italia.</p>
+        <div class="counter reveal">
+          <span class="count" data-target="4975">0</span>
+          <span class="count-label">fontanelle già sulla mappa</span>
+        </div>
+        <div class="timeline reveal">
+          <span class="dot on">Brescia</span><span class="line"></span>
+          <span class="dot">Lombardia</span><span class="line"></span>
+          <span class="dot">Nord Italia</span><span class="line"></span>
+          <span class="dot">Italia</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOSTIENI -->
+    <section id="sostieni" class="section">
+      <div class="wrap narrow center">
+        <h2 class="reveal">BeviQui è gratis. E vogliamo che resti così.</h2>
+        <p class="big reveal">Niente pubblicità invadenti, non vendiamo i tuoi dati, nessun abbonamento. È un progetto indipendente, nato in Italia per amore dell'acqua pubblica. Se credi che l'acqua buona debba essere di tutti, dacci una mano a portarla in ogni città.</p>
+        <p class="sub reveal">Sostenerci non costa per forza un euro:</p>
+        <div class="support reveal">
+          <a class="card support-card" href="#" data-todo="link donazione Ko-fi/Satispay"><span class="ico-circle sm"><svg class="ico"><use href="#i-drop"/></svg></span><h3>Offri un'acqua</h3><p>Un piccolo contributo libero.</p></a>
+          <button class="card support-card" id="shareBtn"><span class="ico-circle sm"><svg class="ico"><use href="#i-share"/></svg></span><h3>Parlane</h3><p>Condividi BeviQui con chi ami.</p></button>
+          <a class="card support-card" href="#prova"><span class="ico-circle sm"><svg class="ico"><use href="#i-plus"/></svg></span><h3>Aggiungi una fontanella</h3><p>Fai crescere la mappa.</p></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LISTA ATTESA -->
+    <section id="lista" class="section section-teal">
+      <div class="wrap narrow center reveal">
+        <h2>Vuoi essere tra i primi?</h2>
+        <p class="lead-light">Lasciaci la tua email: ti avvisiamo appena BeviQui è disponibile nella tua zona, con le nuove fontanelle vicino a te. Niente spam, solo acqua buona.</p>
+        <!-- Collega l'endpoint Formspree (gratis) in action -->
+        <form class="signup" action="https://formspree.io/f/XXXXXXXX" method="POST">
+          <input type="email" name="email" placeholder="La tua email" required aria-label="La tua email" />
+          <button class="btn btn-light" type="submit">Avvisami</button>
+        </form>
+        <p class="microcopy light">Rispettiamo la tua privacy. Ti scriviamo solo quando conta.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="wrap narrow">
+        <h2 class="center">Domande veloci</h2>
+        <div class="faq">
+          <details><summary>È davvero gratis?</summary><p>Sì, al 100%. Nessun costo nascosto.</p></details>
+          <details><summary>Devo registrarmi?</summary><p>No. Apri e usi tutto subito. Ti chiediamo il nome solo dopo il tuo primo contributo, per ringraziarti.</p></details>
+          <details><summary>L'acqua delle fontanelle è sicura?</summary><p>Sono punti di acqua potabile pubblica gestiti dagli enti locali. Dove serve, la community segnala lo stato.</p></details>
+          <details><summary>Funziona nella mia città?</summary><p>Partiamo da Brescia e cresciamo ogni settimana. Iscriviti alla lista e ti avvisiamo quando arriviamo da te.</p></details>
+          <details><summary>Da dove arrivano i dati?</summary><p>Dalle mappe pubbliche di OpenStreetMap e dai contributi della community.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER CTA -->
+    <section class="section section-cta center">
+      <div class="wrap narrow reveal">
+        <h2>L'acqua buona è qui. Inizia adesso.</h2>
+        <p class="big">Trova la fontanella. Riempi la borraccia. Bevi. Riparti più leggero.</p>
+        <a class="btn btn-primary btn-lg" href="#prova">Provala gratis</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <div>
+        <span class="brand-name small">Bevi<span>Qui</span></span>
+        <p class="muted small">Acqua potabile pubblica · progetto indipendente, nato in Italia 🇮🇹</p>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="termini.html">Termini</a>
+        <a href="mailto:francescoguiz@gmail.com">Contatti</a>
+        <a href="#sostieni">Sostieni</a>
+        <span class="muted small">© <span id="year">2026</span> BeviQui · Astra Gardens</span>
+      </div>
+    </div>
+    <p class="wrap muted xsmall credits">Dati fontanelle © OpenStreetMap contributors · Meteo da Open-Meteo</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Header solido al scroll
+    var nav = document.getElementById('nav');
+    var onScroll = function () { nav.classList.toggle('solid', window.scrollY > 12); };
+    onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal allo scroll
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+    // Contatore animato
+    var counter = document.querySelector('.count');
+    if (counter) {
+      var cio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          cio.disconnect();
+          var target = +counter.dataset.target, t0 = null, dur = 1600;
+          if (reduce) { counter.textContent = target.toLocaleString('it-IT'); return; }
+          var tick = function (t) {
+            if (!t0) t0 = t;
+            var p = Math.min((t - t0) / dur, 1), val = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+            counter.textContent = val.toLocaleString('it-IT');
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        });
+      }, { threshold: 0.5 });
+      cio.observe(counter);
+    }
+
+    // Condividi
+    var sb = document.getElementById('shareBtn');
+    if (sb) sb.addEventListener('click', function () {
+      var data = { title: 'BeviQui', text: "Trova l'acqua pubblica vicino a te 💧", url: location.href };
+      if (navigator.share) navigator.share(data).catch(function () {});
+      else { navigator.clipboard && navigator.clipboard.writeText(location.href); sb.querySelector('p').textContent = 'Link copiato!'; }
+    });
+  </script>
+</body>
+</html>

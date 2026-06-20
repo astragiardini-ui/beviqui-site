@@ -291,19 +291,35 @@
       else { navigator.clipboard && navigator.clipboard.writeText(location.href); sb.querySelector('p').textContent = 'Link copiato!'; }
     });
 
-    // Contatore fontanelle SOTTO il mockup: base (dataset Brescia) + community LIVE da Supabase.
+    // Contatore fontanelle SOTTO il mockup: cresce da 0 al numero al caricamento pagina.
+    // Numero = base (dataset Brescia) + community LIVE da Supabase.
     (function () {
       var el = document.getElementById('fountCount');
       if (!el) return;
       var base = parseInt(el.getAttribute('data-base'), 10) || 4975;
-      el.textContent = base.toLocaleString('it-IT');
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var shown = 0, raf = null;
+      function animateTo(target) {
+        if (reduce) { shown = target; el.textContent = target.toLocaleString('it-IT'); return; }
+        if (raf) cancelAnimationFrame(raf);
+        var start = shown, t0 = null, dur = 1600;
+        function tick(t) {
+          if (!t0) t0 = t;
+          var p = Math.min((t - t0) / dur, 1);
+          shown = Math.floor(start + (target - start) * (1 - Math.pow(1 - p, 3)));
+          el.textContent = shown.toLocaleString('it-IT');
+          if (p < 1) raf = requestAnimationFrame(tick); else shown = target;
+        }
+        raf = requestAnimationFrame(tick);
+      }
+      animateTo(base); // cresce da 0 al numero base appena carica
       try {
         var SB = 'https://waxzrmlspgpuxvftzkvd.supabase.co';
         var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndheHpybWxzcGdwdXh2ZnR6a3ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5Mjc5MjksImV4cCI6MjA5NjUwMzkyOX0.J4vSIKgqDTjAQpSJb81kGD1Yhdrp0eyo_4y3yNcgiX0';
         fetch(SB + '/rest/v1/fountains?select=id', { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, Prefer: 'count=exact', Range: '0-0' } })
           .then(function (r) {
             var cr = r.headers.get('content-range'); var tot = cr ? parseInt(cr.split('/')[1], 10) : NaN;
-            if (!isNaN(tot)) el.textContent = (base + tot).toLocaleString('it-IT');
+            if (!isNaN(tot) && tot > 0) animateTo(base + tot);
           }).catch(function () {});
       } catch (e) {}
     })();

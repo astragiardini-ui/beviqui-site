@@ -24,7 +24,7 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[
     {"@type":"WebSite","name":"BeviQui","url":"https://beviqui.it/","inLanguage":"it-IT","description":"BeviQui mostra sulla mappa le fontanelle e le case dell'acqua potabile pubbliche più vicine a te. Gratis, senza registrazione."},
-    {"@type":"MobileApplication","name":"BeviQui","operatingSystem":"iOS, Android","applicationCategory":"TravelApplication","inLanguage":"it-IT","url":"https://beviqui.it/","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"description":"App gratuita per trovare fontanelle e case dell'acqua potabile pubbliche vicino a te, su mappa, con indicazioni. Aggiungi quelle mancanti: community e AI le verificano. Si parte da Brescia."}
+    {"@type":"MobileApplication","name":"BeviQui","operatingSystem":"iOS, Android","applicationCategory":"TravelApplication","inLanguage":"it-IT","url":"https://beviqui.it/","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"description":"App gratuita per trovare fontanelle e case dell'acqua potabile pubbliche vicino a te, su mappa, con indicazioni. Aggiungi quelle mancanti: community e AI le verificano. Copre la Lombardia (oltre 12.000 punti) ed è in crescita in tutta Italia."}
   ]}
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -72,7 +72,7 @@
             <a class="btn btn-primary" href="#prova">Provala gratis</a>
             <a class="btn btn-ghost" href="#lista">Entra nella lista d'attesa</a>
           </div>
-          <p class="microcopy">Gratis e senza registrazione · quasi <strong>5.000 fontanelle</strong> già sulla mappa, si parte da Brescia.</p>
+          <p class="microcopy">Gratis e senza registrazione · oltre <strong>12.000 fontanelle</strong> già sulla mappa in Lombardia.</p>
         </div>
         <div class="hero-art reveal">
           <div class="phone">
@@ -81,7 +81,7 @@
             </div>
           </div>
           <div class="hero-count">
-            <span class="hc-num" id="fountCount" data-base="4975">4.975</span>
+            <span class="hc-num" id="fountCount" data-base="12319">12.319</span>
             <span class="hc-label">fontanelle già sulla mappa · cresce ogni giorno</span>
           </div>
         </div>
@@ -165,12 +165,12 @@
         <h2 class="reveal">La mappa cresce con te</h2>
         <p class="big reveal">Conosci una fontanella che non c'è ancora? Aggiungila con una <strong>"Scoperta BeviQui"</strong> e falla esistere per tutti. Segnala se funziona, se è chiusa o se ha bisogno di una mano. Insieme teniamo viva la mappa dell'acqua pubblica d'Italia.</p>
         <div class="counter reveal">
-          <span class="count" data-target="4975">0</span>
-          <span class="count-label">fontanelle già sulla mappa</span>
+          <span class="count" data-target="12319">0</span>
+          <span class="count-label">fontanelle già sulla mappa in Lombardia</span>
         </div>
         <div class="timeline reveal">
-          <span class="dot on">Brescia</span><span class="line"></span>
-          <span class="dot">Lombardia</span><span class="line"></span>
+          <span class="dot on">Brescia</span><span class="line on"></span>
+          <span class="dot on">Lombardia</span><span class="line"></span>
           <span class="dot">Nord Italia</span><span class="line"></span>
           <span class="dot">Italia</span>
         </div>
@@ -213,7 +213,7 @@
           <details><summary>È davvero gratis?</summary><p>Sì, al 100%. Nessun costo nascosto.</p></details>
           <details><summary>Devo registrarmi?</summary><p>No. Apri e usi tutto subito. Ti chiediamo il nome solo dopo il tuo primo contributo, per ringraziarti.</p></details>
           <details><summary>L'acqua delle fontanelle è sicura?</summary><p>Sono punti di acqua potabile pubblica gestiti dagli enti locali. Dove serve, la community segnala lo stato.</p></details>
-          <details><summary>Funziona nella mia città?</summary><p>Partiamo da Brescia e cresciamo ogni settimana. Iscriviti alla lista e ti avvisiamo quando arriviamo da te.</p></details>
+          <details><summary>Funziona nella mia città?</summary><p>Partiamo dalla Lombardia, dove ci sono già oltre 12.000 fontanelle sulla mappa, e cresciamo ogni settimana in tutta Italia. Iscriviti alla lista e ti avvisiamo quando arriviamo da te.</p></details>
           <details><summary>Da dove arrivano i dati?</summary><p>Dalle mappe pubbliche di OpenStreetMap e dai contributi della community.</p></details>
         </div>
       </div>
@@ -294,11 +294,11 @@
     });
 
     // Contatore fontanelle SOTTO il mockup: cresce da 0 al numero al caricamento pagina.
-    // Numero = base (dataset Brescia) + community LIVE da Supabase.
+    // Numero = base (dataset Lombardia) + community LIVE da Supabase.
     (function () {
       var el = document.getElementById('fountCount');
       if (!el) return;
-      var base = parseInt(el.getAttribute('data-base'), 10) || 4975;
+      var base = parseInt(el.getAttribute('data-base'), 10) || 12319;
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var shown = 0, raf = null;
       function animateTo(target) {

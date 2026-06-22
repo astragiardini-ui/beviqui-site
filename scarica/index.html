@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scarica BeviQui — l'app dell'acqua pubblica gratis</title>
+  <meta name="description" content="Scarica BeviQui: trova fontanelle e acqua pubblica gratis vicino a te. Per iPhone e Android. Gratis, senza registrazione." />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="/favicon.png" />
+  <meta property="og:title" content="Scarica BeviQui" />
+  <meta property="og:description" content="Trova l'acqua pubblica gratis vicino a te. Per iPhone e Android." />
+  <meta property="og:image" content="/og-image.png" />
+  <style>
+    :root { --teal: #0E7C86; --teal-dark: #0a5e66; --ink: #0f2a2d; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(160deg, var(--teal) 0%, var(--teal-dark) 100%);
+      color: #fff; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; padding: 28px;
+    }
+    .card { width: 100%; max-width: 420px; text-align: center; }
+    .logo { width: 96px; height: 96px; border-radius: 22px; background: #fff; padding: 10px; object-fit: contain; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    h1 { font-size: 30px; margin: 22px 0 6px; }
+    .sub { font-size: 17px; opacity: .92; margin: 0 0 26px; line-height: 1.45; }
+    .btns { display: flex; flex-direction: column; gap: 12px; }
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 16px 18px; border-radius: 14px; font-size: 17px; font-weight: 700;
+      text-decoration: none; background: #fff; color: var(--teal-dark);
+      box-shadow: 0 6px 18px rgba(0,0,0,.18); transition: transform .12s ease;
+    }
+    .btn:active { transform: scale(.98); }
+    .btn.soon { background: rgba(255,255,255,.18); color: #fff; box-shadow: none; cursor: default; }
+    .btn.hi { outline: 3px solid #ffd84d; outline-offset: 2px; }
+    .note { margin: 18px 0 0; font-size: 14px; opacity: .9; min-height: 18px; }
+    .back { display: inline-block; margin-top: 26px; color: #fff; opacity: .85; font-size: 14px; text-decoration: none; }
+    .back:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <img class="logo" src="/logo.png" alt="BeviQui" />
+    <h1>Scarica BeviQui</h1>
+    <p class="sub">Trova l'acqua pubblica gratis vicino a te. 💧<br />Gratis, senza registrazione.</p>
+    <div class="btns">
+      <!-- iOS: per ora beta TestFlight. Quando l'app è sull'App Store, sostituire href con:
+           https://apps.apple.com/app/id6775767613 -->
+      <a id="ios" class="btn" href="https://testflight.apple.com/join/uyCJ8XD7">  iPhone — beta TestFlight</a>
+      <!-- Android: quando è sul Play Store, sostituire con:
+           https://play.google.com/store/apps/details?id=com.beviqui.app -->
+      <a id="android" class="btn soon">🤖 Android — in arrivo</a>
+    </div>
+    <p class="note" id="note"></p>
+    <a class="back" href="/">← Torna a beviqui.it</a>
+  </main>
+  <script>
+    // Rileva il dispositivo ed evidenzia il pulsante giusto.
+    var ua = navigator.userAgent || '';
+    var isIOS = /iPhone|iPad|iPod/i.test(ua);
+    var isAnd = /Android/i.test(ua);
+    if (isIOS) document.getElementById('ios').classList.add('hi');
+    if (isAnd) {
+      document.getElementById('android').classList.add('hi');
+      document.getElementById('note').textContent = 'La versione Android sta arrivando: intanto su iPhone è già in beta.';
+    }
+  </script>
+</body>
+</html>

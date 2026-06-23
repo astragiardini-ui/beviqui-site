@@ -60,10 +60,25 @@ strong{color:inherit;font-weight:600}
 
 /* HERO phone mockup */
 .hero-art{display:flex;justify-content:center}
-.phone{width:248px;height:506px;border-radius:38px;background:#0e2a33;padding:12px;box-shadow:-22px 34px 70px rgba(9,107,133,.34);position:relative;transform:perspective(1300px) rotateY(-16deg) rotateX(4deg);transition:transform .45s ease}
-.phone:hover{transform:perspective(1300px) rotateY(-6deg) rotateX(2deg)}
-.phone:before{content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);width:80px;height:7px;border-radius:99px;background:#1b3a44;z-index:2}
-.phone-screen{width:100%;height:100%;border-radius:28px;overflow:hidden;position:relative;background:#dff0f3}
+/* Mockup telefono — iPhone moderno: Dynamic Island, cornice titanio, bordi sottili */
+.phone-stage{position:relative;display:inline-block;animation:floaty 6.5s ease-in-out infinite;will-change:transform}
+.phone-stage:before{content:"";position:absolute;inset:-14% -20%;z-index:-1;background:radial-gradient(closest-side,rgba(9,107,133,.32),rgba(242,153,74,.10) 55%,rgba(9,107,133,0) 76%)}
+.phone{width:250px;height:512px;border-radius:46px;background:linear-gradient(155deg,#2b3034,#0b0d0f);padding:9px;position:relative;box-shadow:0 0 0 1px rgba(255,255,255,.06) inset,-26px 42px 82px rgba(9,107,133,.40),0 24px 60px rgba(7,18,22,.42);transform:perspective(1500px) rotateY(-14deg) rotateX(5deg) rotateZ(-1deg);transition:transform .5s ease}
+.phone:hover{transform:perspective(1500px) rotateY(-7deg) rotateX(3deg)}
+.island{position:absolute;top:15px;left:50%;transform:translateX(-50%);width:80px;height:24px;border-radius:99px;background:#000;z-index:3}
+.phone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:#dff0f3}
+.phone-screen img{width:100%;height:100%;object-fit:cover;display:block}
+/* variante piccola e frontale per la vetrina delle 3 schermate */
+.phone-sm{width:206px;height:422px;border-radius:40px;transform:perspective(1400px) rotateY(-5deg) rotateX(2deg);box-shadow:-14px 22px 48px rgba(9,107,133,.26)}
+.phone-sm:hover{transform:perspective(1400px) rotateY(-2deg) rotateX(1deg)}
+.phone-sm .island{width:64px;height:19px;top:12px}
+.phone-sm .phone-screen{border-radius:33px}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+/* vetrina 3 schermate */
+.screens-grid{display:grid;grid-template-columns:1fr;gap:42px;justify-items:center;margin-top:30px}
+.shot{margin:0;text-align:center;max-width:300px}
+.shot figcaption h3{margin:18px 0 6px;font-size:1.15rem;color:var(--ink)}
+.shot figcaption p{color:var(--muted);font-size:.98rem;line-height:1.5}
 .map-bg{position:absolute;inset:0;background:radial-gradient(120% 80% at 70% 20%,#eaf6f8,#cfe7ec)}
 .street{position:absolute;background:#bcd9df;border-radius:6px;opacity:.9}
 .street.s1{top:24%;left:-10%;width:120%;height:10px;transform:rotate(-8deg)}
@@ -184,6 +199,7 @@ strong{color:inherit;font-weight:600}
   .hero{padding:70px 0 110px}
   .hero-grid{grid-template-columns:1.05fr .95fr}
   .steps{grid-template-columns:repeat(3,1fr)}
+  .screens-grid{grid-template-columns:repeat(3,1fr);align-items:start}
   .benefits{grid-template-columns:1fr 1fr;gap:28px 40px}
   .prova-grid{grid-template-columns:1.1fr .9fr}
   .support{grid-template-columns:repeat(3,1fr)}
@@ -195,4 +211,14 @@ strong{color:inherit;font-weight:600}
   *{animation:none!important}
   .reveal{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
+}
+
+/* --- Esperienza touch più fluida: tap reattivi (niente ritardo) + niente stati :hover
+   "appiccicati" al tocco (su mobile, tappare dopo lo scroll faceva partire animazioni
+   hover che davano l'effetto "la pagina si blocca"). --- */
+a,button,.btn,.support-card,.card,.nav,summary,label{touch-action:manipulation}
+@media (hover:none){
+  .btn:hover,.btn-primary:hover,.btn-ghost:hover,.btn-light:hover,.support-card:hover{transform:none}
+  .phone:hover{transform:perspective(1500px) rotateY(-14deg) rotateX(5deg) rotateZ(-1deg)}
+  .phone-sm:hover{transform:perspective(1400px) rotateY(-5deg) rotateX(2deg)}
 }

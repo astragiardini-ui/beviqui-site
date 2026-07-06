@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Scarica BeviQui — l'app dell'acqua pubblica gratis</title>
-  <meta name="description" content="Scarica BeviQui: trova fontanelle e acqua pubblica gratis vicino a te. Per iPhone e Android. Gratis, senza registrazione." />
+  <meta name="description" content="Scarica BeviQui: trova fontanelle e acqua pubblica gratis vicino a te. Su iPhone dall'App Store. Gratis, senza registrazione." />
   <meta name="robots" content="index,follow" />
   <link rel="icon" href="/favicon.png" />
   <meta property="og:title" content="Scarica BeviQui" />
-  <meta property="og:description" content="Trova l'acqua pubblica gratis vicino a te. Per iPhone e Android." />
+  <meta property="og:description" content="Trova l'acqua pubblica gratis vicino a te. Su iPhone dall'App Store." />
   <meta property="og:image" content="/og-image.png" />
   <style>
     :root { --teal: #0E7C86; --teal-dark: #0a5e66; --ink: #0f2a2d; }
@@ -45,9 +45,8 @@
     <h1>Scarica BeviQui</h1>
     <p class="sub">Trova l'acqua pubblica gratis vicino a te. 💧<br />Gratis, senza registrazione.</p>
     <div class="btns">
-      <!-- iOS: per ora beta TestFlight. Quando l'app è sull'App Store, sostituire href con:
-           https://apps.apple.com/app/id6775767613 -->
-      <a id="ios" class="btn" href="https://testflight.apple.com/join/uyCJ8XD7">  iPhone — beta TestFlight</a>
+      <!-- iOS: LIVE su App Store dal 28/06/2026 -->
+      <a id="ios" class="btn" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613">📲 Scarica su App Store</a>
       <!-- Android: quando è sul Play Store, sostituire con:
            https://play.google.com/store/apps/details?id=com.beviqui.app -->
       <a id="android" class="btn soon">🤖 Android — in arrivo</a>
@@ -60,10 +59,13 @@
     var ua = navigator.userAgent || '';
     var isIOS = /iPhone|iPad|iPod/i.test(ua);
     var isAnd = /Android/i.test(ua);
-    if (isIOS) document.getElementById('ios').classList.add('hi');
+    if (isIOS) {
+      document.getElementById('ios').classList.add('hi');
+      document.getElementById('note').textContent = 'Già disponibile su App Store per iPhone (iOS 15.1+).';
+    }
     if (isAnd) {
       document.getElementById('android').classList.add('hi');
-      document.getElementById('note').textContent = 'La versione Android sta arrivando: intanto su iPhone è già in beta.';
+      document.getElementById('note').textContent = 'La versione Android sta arrivando. Su iPhone la scarichi già dall’App Store.';
     }
   </script>
 </body>

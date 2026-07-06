@@ -45,6 +45,7 @@ strong{color:inherit;font-weight:600}
 .nav-row{display:flex;align-items:center;justify-content:space-between;height:66px}
 .brand{display:flex;align-items:center;gap:9px}
 .brand-drop{display:flex}
+.brand-drop img{height:30px;width:auto;border-radius:8px;display:block}
 .brand-name{font-weight:700;font-size:1.35rem;color:var(--teal)}
 .brand-name span{color:var(--teal-dark)}
 .brand-name.small{font-size:1.15rem}
@@ -52,7 +53,8 @@ strong{color:inherit;font-weight:600}
 /* HERO */
 .hero{position:relative;background:linear-gradient(160deg,var(--ice),#fff 72%);padding:54px 0 92px}
 .hero-grid{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
-.hero-text .lead{font-size:1.22rem;color:var(--muted);margin:18px 0 26px;max-width:560px}
+.hero-body .lead{font-size:1.22rem;color:var(--muted);margin:0 0 26px;max-width:560px}
+.hero-head{margin:0} .hero-body{margin:0}
 .cta-row{display:flex;gap:12px;flex-wrap:wrap}
 .microcopy{font-size:.92rem;color:var(--muted);margin-top:16px}
 .microcopy.light{color:rgba(255,255,255,.85)}
@@ -64,20 +66,20 @@ strong{color:inherit;font-weight:600}
 /* Mockup telefono — iPhone moderno: Dynamic Island, cornice titanio, bordi sottili */
 .phone-stage{position:relative;display:inline-block;animation:floaty 6.5s ease-in-out infinite;will-change:transform}
 .phone-stage:before{content:"";position:absolute;inset:-14% -20%;z-index:-1;background:radial-gradient(closest-side,rgba(9,107,133,.32),rgba(242,153,74,.10) 55%,rgba(9,107,133,0) 76%)}
-.phone{width:250px;height:512px;border-radius:46px;background:linear-gradient(155deg,#2b3034,#0b0d0f);padding:9px;position:relative;box-shadow:0 0 0 1px rgba(255,255,255,.06) inset,-26px 42px 82px rgba(9,107,133,.40),0 24px 60px rgba(7,18,22,.42);transform:perspective(1500px) rotateY(-14deg) rotateX(5deg) rotateZ(-1deg);transition:transform .5s ease}
-.phone:hover{transform:perspective(1500px) rotateY(-7deg) rotateX(3deg)}
+.phone{width:250px;height:512px;border-radius:46px;background:linear-gradient(155deg,#2b3034,#0b0d0f);padding:9px;position:relative;box-shadow:0 0 0 1px rgba(255,255,255,.06) inset,0 30px 70px rgba(9,107,133,.34),0 12px 30px rgba(7,18,22,.30);transform:none;transition:transform .5s ease}
+.phone:hover{transform:none}
 .island{position:absolute;top:15px;left:50%;transform:translateX(-50%);width:80px;height:24px;border-radius:99px;background:#000;z-index:3}
 .phone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:#dff0f3}
 .phone-screen img{width:100%;height:100%;object-fit:cover;display:block}
 /* variante piccola e frontale per la vetrina delle 3 schermate */
-.phone-sm{width:206px;height:422px;border-radius:40px;transform:perspective(1400px) rotateY(-5deg) rotateX(2deg);box-shadow:-14px 22px 48px rgba(9,107,133,.26)}
-.phone-sm:hover{transform:perspective(1400px) rotateY(-2deg) rotateX(1deg)}
+.phone-sm{width:206px;height:422px;border-radius:40px;transform:none;box-shadow:0 18px 40px rgba(9,107,133,.22)}
+.phone-sm:hover{transform:none}
 .phone-sm .island{width:64px;height:19px;top:12px}
 .phone-sm .phone-screen{border-radius:33px}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 /* vetrina 3 schermate */
 .screens-grid{display:grid;grid-template-columns:1fr;gap:42px;justify-items:center;margin-top:30px}
-.shot{margin:0;text-align:center;max-width:300px}
+.shot{margin:0 auto;text-align:center;max-width:300px;display:flex;flex-direction:column;align-items:center}
 .shot figcaption h3{margin:18px 0 6px;font-size:1.15rem;color:var(--ink)}
 .shot figcaption p{color:var(--muted);font-size:.98rem;line-height:1.5}
 .map-bg{position:absolute;inset:0;background:radial-gradient(120% 80% at 70% 20%,#eaf6f8,#cfe7ec)}
@@ -172,6 +174,7 @@ strong{color:inherit;font-weight:600}
 
 /* FOOTER */
 .section-cta .btn-primary{background:var(--teal-light)} .section-cta .btn-primary:hover{background:var(--teal)}
+.section-cta .btn-lg{margin-top:26px}
 .footer{padding:34px 0 26px;border-top:1px solid var(--line);background:var(--soft)}
 .footer-row{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
 .footer-links{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
@@ -198,7 +201,10 @@ strong{color:inherit;font-weight:600}
 @media(min-width:760px){
   .section{padding:104px 0}
   .hero{padding:70px 0 110px}
-  .hero-grid{grid-template-columns:1.05fr .95fr}
+  .hero-grid{grid-template-columns:1.05fr .95fr;grid-template-areas:"head art" "body art";grid-template-rows:min-content min-content;column-gap:48px;row-gap:14px;align-content:center;align-items:center}
+  .hero-head{grid-area:head}
+  .hero-body{grid-area:body}
+  .hero-art{grid-area:art}
   .steps{grid-template-columns:repeat(3,1fr)}
   .screens-grid{grid-template-columns:repeat(3,1fr);align-items:start}
   .benefits{grid-template-columns:1fr 1fr;gap:28px 40px}
@@ -220,6 +226,6 @@ strong{color:inherit;font-weight:600}
 a,button,.btn,.support-card,.card,.nav,summary,label{touch-action:manipulation}
 @media (hover:none){
   .btn:hover,.btn-primary:hover,.btn-ghost:hover,.btn-light:hover,.support-card:hover{transform:none}
-  .phone:hover{transform:perspective(1500px) rotateY(-14deg) rotateX(5deg) rotateZ(-1deg)}
-  .phone-sm:hover{transform:perspective(1400px) rotateY(-5deg) rotateX(2deg)}
+  .phone:hover{transform:none}
+  .phone-sm:hover{transform:none}
 }

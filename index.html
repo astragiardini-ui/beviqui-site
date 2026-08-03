@@ -42,6 +42,21 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <!-- Browser dei social (Instagram/Facebook): lì i link "scrivi una mail" vengono ignorati e a
+         volte l'App Store non si apre. Si avvisa come uscirne, che è l'unica cosa che risolve. -->
+    <div id="ig-hint" style="display:none;background:#12303A;color:#fff;padding:12px 16px;font:600 14px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-align:center">
+      Stai usando il browser di Instagram. Per scaricare l'app tocca <strong>⋯</strong> in alto a destra e scegli <strong>«Apri in Safari»</strong> (o Chrome).
+    </div>
+    <script>
+      (function () {
+        var ua = navigator.userAgent || '';
+        if (/Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok/i.test(ua)) {
+          var el = document.getElementById('ig-hint');
+          if (el) el.style.display = 'block';
+        }
+      })();
+    </script>
+
   <!-- SVG sprite (icone) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -95,7 +110,7 @@
         <div class="hero-body reveal">
           <p class="lead"><strong>BeviQui</strong> ti mostra sulla mappa le <strong>fontanelle</strong> e le <strong>case dell'acqua</strong> più vicine a te. Riempi la borraccia gratis, ovunque sei. Meno plastica, più leggerezza.</p>
           <div class="cta-row">
-            <a class="btn btn-primary btn-lg" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613">Scarica l'app gratis</a>
+            <a class="btn btn-primary btn-lg" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613" target="_blank" rel="noopener">Scarica l'app gratis</a>
             <a class="btn btn-ghost" href="#prova">Scaricala dal telefono</a>
           </div>
           <p class="microcopy">Gratis e senza registrazione · oltre <strong>12.000 fontanelle</strong> già sulla mappa in tutta Italia.</p>
@@ -183,8 +198,8 @@
           <p class="lead-light">BeviQui è già su iPhone: scaricala gratis dall'App Store. Su Android arriva presto: scrivimi e sei tra i primi. <strong>Inquadra il QR</strong> con la fotocamera del telefono e inizia subito a trovare l'acqua intorno a te.</p>
           <p class="microcopy light">Nessuna registrazione obbligatoria. Apri e usi tutto.</p>
           <div class="badges">
-            <a class="btn btn-light btn-lg" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613">Scarica l'app</a>
-            <a class="btn btn-light btn-lg" href="mailto:beviqui.app@gmail.com?subject=BeviQui%20su%20Android&body=Voglio%20essere%20tra%20i%20primi%20a%20usare%20BeviQui%20su%20Android.%0A%0ALa%20mia%20mail%20Google%20(quella%20del%20telefono)%20%C3%A8%3A%20%0A%0AGrazie!">Android — entra tra i primi</a>
+            <a class="btn btn-light btn-lg" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613" target="_blank" rel="noopener">Scarica l'app</a>
+            <a class="btn btn-light btn-lg" href="/android/">Android — entra tra i primi</a>
           </div>
         </div>
         <div class="qr-wrap reveal">
@@ -270,7 +285,7 @@
       <div class="footer-links">
         <a href="privacy.html">Privacy</a>
         <a href="termini.html">Termini</a>
-        <a href="mailto:francescoguiz@gmail.com">Contatti</a>
+        <a href="mailto:francescoguiz@gmail.com">francescoguiz@gmail.com</a>
         <a href="#sostieni">Sostieni</a>
         <a href="/fontanelle/brescia">Fontanelle Brescia</a>
         <a href="/fontanelle/lombardia">Fontanelle Lombardia</a>

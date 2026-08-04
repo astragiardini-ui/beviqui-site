@@ -70,29 +70,55 @@
     }
   </script>
       <script>
-      // USCIRE DAL BROWSER DI INSTAGRAM.
-      // Instagram e Facebook aprono i link dentro una loro finestrella che, su iPhone, spesso NON
-      // riesce a passare all'App Store: si tocca e non succede niente. iOS mette a disposizione un
-      // indirizzo speciale che apre Safari: da Safari l'App Store si apre sempre.
-      // Si prova quello e, se il telefono non lo gestisce, si ripiega sull'indirizzo normale.
+      // AIUTO SOLO SE SERVE (non un banner fisso).
+      // Dentro Instagram/Facebook il tocco sull'App Store a volte non porta da nessuna parte: la
+      // pagina resta bianca perché quel browser non gestisce il passaggio all'App Store. Non lo
+      // forziamo (le scorciatoie note non funzionano più e sono contro le regole di Instagram):
+      // se dopo un attimo siamo ancora qui, compare un riquadro che spiega come uscire.
       (function () {
         var ua = navigator.userAgent || '';
-        var dentroSocial = /Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok|Snapchat/i.test(ua);
-        var iPhone = /iPhone|iPad|iPod/i.test(ua);
-        if (!dentroSocial || !iPhone) return; // browser normale: il link fa già il suo lavoro
+        if (!/Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok|Snapchat/i.test(ua)) return;
+
+        var mostrato = false;
+        function mostraAiuto(indirizzo) {
+          if (mostrato) return;
+          mostrato = true;
+          var box = document.createElement('div');
+          box.setAttribute('style',
+            'position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;background:#12303A;color:#fff;' +
+            'padding:16px 18px;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.35);' +
+            "font:600 15px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-align:center");
+          box.innerHTML =
+            "Non si è aperto l'App Store?<br /><span style='font-weight:400;opacity:.9'>" +
+            "Tocca <strong>&#183;&#183;&#183;</strong> in alto a destra e scegli <strong>&laquo;Apri in Safari&raquo;</strong>.</span>";
+          var copia = document.createElement('button');
+          copia.textContent = "Copia il link dell'App Store";
+          copia.setAttribute('style',
+            'margin-top:12px;width:100%;background:#FF6D00;color:#fff;border:0;border-radius:12px;' +
+            'padding:12px 14px;font-weight:800;font-size:15px');
+          copia.onclick = function () {
+            var t = document.createElement('textarea');
+            t.value = indirizzo; document.body.appendChild(t); t.select();
+            try { document.execCommand('copy'); copia.textContent = 'Copiato ✓'; } catch (e) {}
+            document.body.removeChild(t);
+          };
+          var chiudi = document.createElement('button');
+          chiudi.textContent = 'Chiudi';
+          chiudi.setAttribute('style','margin-top:8px;width:100%;background:transparent;color:#9FC3CE;border:0;font-size:14px');
+          chiudi.onclick = function () { box.remove(); mostrato = false; };
+          box.appendChild(copia); box.appendChild(chiudi);
+          document.body.appendChild(box);
+        }
 
         document.querySelectorAll('a[href^="https://apps.apple.com"]').forEach(function (a) {
-          a.addEventListener('click', function (e) {
-            var normale = a.getAttribute('href');
-            e.preventDefault();
-            var uscito = false;
-            var segnaUscita = function () { uscito = true; };
-            document.addEventListener('visibilitychange', segnaUscita, { once: true });
-            window.addEventListener('pagehide', segnaUscita, { once: true });
-            // 1) apri Safari sulla pagina dell'App Store
-            window.location.href = 'x-safari-' + normale;
-            // 2) se il telefono non conosce quell'indirizzo, non succede nulla: si ripiega
-            setTimeout(function () { if (!uscito) window.location.href = normale; }, 700);
+          a.addEventListener('click', function () {
+            // NON blocchiamo il link: parte normalmente (è un Universal Link, la via consigliata).
+            // Se dopo un attimo siamo ancora su questa pagina, vuol dire che non è partito.
+            var qui = true;
+            var uscito = function () { qui = false; };
+            document.addEventListener('visibilitychange', uscito, { once: true });
+            window.addEventListener('pagehide', uscito, { once: true });
+            setTimeout(function () { if (qui && !document.hidden) mostraAiuto(a.href); }, 1500);
           });
         });
       })();

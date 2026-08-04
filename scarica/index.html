@@ -92,16 +92,15 @@
         var IN_APP = /Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok/i.test(navigator.userAgent || '');
         var HTTPS = 'https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613';
         var SCHEMA = 'itms-apps://apps.apple.com/it/app/id6775767613';
-        if (!IN_APP) return; // browser normale: il link fa già il suo lavoro
+        if (!IN_APP) return;
         document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function (a) {
-          a.addEventListener('click', function (e) {
-            e.preventDefault();
+          a.setAttribute('href', SCHEMA);
+          a.addEventListener('click', function () {
             var andato = false;
-            var ripiego = setTimeout(function () { if (!andato) window.location.href = HTTPS; }, 900);
-            var uscito = function () { andato = true; clearTimeout(ripiego); };
+            var uscito = function () { andato = true; };
             document.addEventListener('visibilitychange', uscito, { once: true });
             window.addEventListener('pagehide', uscito, { once: true });
-            window.location.href = SCHEMA;
+            setTimeout(function () { if (!andato) window.location.href = HTTPS; }, 1200);
           });
         });
       })();

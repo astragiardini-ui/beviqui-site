@@ -366,5 +366,33 @@
       } catch (e) {}
     })();
   </script>
+      <script>
+      // USCIRE DAL BROWSER DI INSTAGRAM.
+      // Instagram e Facebook aprono i link dentro una loro finestrella che, su iPhone, spesso NON
+      // riesce a passare all'App Store: si tocca e non succede niente. iOS mette a disposizione un
+      // indirizzo speciale che apre Safari: da Safari l'App Store si apre sempre.
+      // Si prova quello e, se il telefono non lo gestisce, si ripiega sull'indirizzo normale.
+      (function () {
+        var ua = navigator.userAgent || '';
+        var dentroSocial = /Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok|Snapchat/i.test(ua);
+        var iPhone = /iPhone|iPad|iPod/i.test(ua);
+        if (!dentroSocial || !iPhone) return; // browser normale: il link fa già il suo lavoro
+
+        document.querySelectorAll('a[href^="https://apps.apple.com"]').forEach(function (a) {
+          a.addEventListener('click', function (e) {
+            var normale = a.getAttribute('href');
+            e.preventDefault();
+            var uscito = false;
+            var segnaUscita = function () { uscito = true; };
+            document.addEventListener('visibilitychange', segnaUscita, { once: true });
+            window.addEventListener('pagehide', segnaUscita, { once: true });
+            // 1) apri Safari sulla pagina dell'App Store
+            window.location.href = 'x-safari-' + normale;
+            // 2) se il telefono non conosce quell'indirizzo, non succede nulla: si ripiega
+            setTimeout(function () { if (!uscito) window.location.href = normale; }, 700);
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

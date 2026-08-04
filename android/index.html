@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>BeviQui su Android — entra tra i primi</title>
-    <meta name="description" content="BeviQui arriva su Android. Entra tra i primi a usarla: scrivici la tua mail Google e ti mandiamo il link." />
+    <meta name="description" content="BeviQui arriva su Android. Entra tra i primi a usarla: lasciaci la tua mail Google e ti mandiamo il link." />
     <link rel="icon" href="/favicon.png" />
     <style>
       * { box-sizing: border-box; margin: 0; }
@@ -19,22 +19,21 @@
       .sub { text-align: center; opacity: .92; margin-bottom: 26px; }
       .card { background: #fff; color: #12303A; border-radius: 18px; padding: 20px; margin-bottom: 16px; }
       .card h2 { font-size: 17px; margin-bottom: 8px; color: #0B6B84; }
-      .mail {
-        display: block; width: 100%; text-align: center; font-size: 17px; font-weight: 800;
-        color: #0B6B84; background: #EAF4F7; border: 2px dashed #9CC6D3; border-radius: 12px;
-        padding: 14px 10px; margin: 12px 0 6px; user-select: all; -webkit-user-select: all;
-        word-break: break-all; text-decoration: none;
-      }
-      .hint { font-size: 13px; opacity: .75; }
+      .hint { font-size: 13px; opacity: .78; }
       .btn {
         display: block; text-align: center; background: #FF6D00; color: #fff; font-weight: 800;
-        text-decoration: none; padding: 15px 18px; border-radius: 14px; margin-top: 12px; font-size: 16px;
+        text-decoration: none; padding: 15px 18px; border-radius: 14px; margin-top: 12px;
+        font-size: 16px; border: 0; width: 100%; cursor: pointer;
       }
       .btn-ghost { background: #12303A; }
-      .steps { padding-left: 20px; margin-top: 8px; }
+      .campo {
+        width: 100%; font-size: 17px; padding: 15px 14px; border: 2px solid #9CC6D3;
+        border-radius: 12px; color: #12303A; background: #fff; margin-top: 6px;
+      }
+      .steps { padding-left: 20px; margin: 8px 0 14px; }
       .steps li { margin-bottom: 6px; }
       .back { display: block; text-align: center; color: #fff; opacity: .85; margin-top: 26px; }
-      #copiato { display: none; text-align: center; font-weight: 800; color: #0B6B84; margin-top: 4px; }
+      #esito { display: none; font-weight: 800; margin-top: 12px; text-align: center; }
     </style>
   </head>
   <body>
@@ -46,32 +45,35 @@
       <div class="card">
         <h2>Come fare</h2>
         <ol class="steps">
-          <li>Copia il nostro indirizzo qui sotto.</li>
-          <li>Scrivici la <strong>mail Google che usi sul telefono</strong>.</li>
-          <li>Ti rispondiamo col link: tocchi, installi, e sei dentro.</li>
+          <li>Scrivi qui sotto la <strong>mail Google che usi sul telefono</strong>.</li>
+          <li>Ti mandiamo il link della prova.</li>
+          <li>Tocchi, installi, e sei dentro.</li>
         </ol>
 
-        <span class="mail" id="mail">beviqui.app@gmail.com</span>
-        <p id="copiato">Copiato ✓</p>
-        <p class="hint">Tocca l'indirizzo per copiarlo.</p>
-
-        <a class="btn" id="scrivi" href="mailto:beviqui.app@gmail.com?subject=BeviQui%20su%20Android&body=Voglio%20essere%20tra%20i%20primi%20a%20usare%20BeviQui%20su%20Android.%0A%0ALa%20mia%20mail%20Google%20(quella%20del%20telefono)%20%C3%A8%3A%20%0A%0AGrazie!">Scrivici ora</a>
+        <form id="modulo" novalidate>
+          <input
+            id="campo" class="campo" type="email" inputmode="email" autocomplete="email"
+            placeholder="la tua mail Google" required
+          />
+          <button type="submit" class="btn" id="invia">Mandami il link</button>
+        </form>
+        <p id="esito"></p>
       </div>
 
       <div class="card">
         <h2>Sei già tra i tester?</h2>
-        <p class="hint">Se ci hai già mandato la tua mail, apri questo link dal telefono Android e tocca «Diventa un tester».</p>
+        <p class="hint">Se ci hai già lasciato la tua mail, apri questo link dal telefono Android e tocca «Diventa un tester».</p>
         <a class="btn btn-ghost" href="https://play.google.com/apps/testing/com.beviqui.app">Attiva il tuo accesso</a>
       </div>
 
       <div class="card" style="background:#EAF4F7">
         <h2>Che cosa facciamo con la tua mail</h2>
         <p class="hint" style="opacity:.9">
-          La usiamo <strong>solo</strong> per aggiungerti all'elenco dei tester su Google Play e
-          mandarti il link: è Google a richiedere l'indirizzo per dare l'accesso alla prova.
-          Non la usiamo per pubblicità, non la cediamo a nessuno e la togliamo appena ce lo chiedi
-          (basta scrivere allo stesso indirizzo). Quando l'app esce sul Play Store per tutti,
-          l'elenco viene cancellato.
+          La usiamo <strong>solo</strong> per darti accesso alla prova su Google Play: è Google a
+          richiedere l'indirizzo per farti entrare. Niente altri dati, nessuna pubblicità, non la
+          cediamo a nessuno. La togliamo appena ce lo chiedi (scrivi a
+          <strong>beviqui.app@gmail.com</strong>) e comunque cancelliamo tutto l'elenco quando
+          l'app esce sul Play Store per tutti.
           <br /><br />
           Dettagli nella <a href="/privacy.html" style="color:#0B6B84;font-weight:800">privacy</a>.
         </p>
@@ -81,23 +83,58 @@
     </div>
 
     <script>
-      // Tocca l'indirizzo per copiarlo. Serve soprattutto dentro i browser dei social (Instagram,
-      // Facebook), dove i link "scrivi una mail" vengono ignorati: così l'indirizzo si prende
-      // comunque, con un tocco solo.
-      var mail = document.getElementById('mail');
-      var ok = document.getElementById('copiato');
-      mail.addEventListener('click', function () {
-        var testo = mail.textContent.trim();
-        var fatto = function () { ok.style.display = 'block'; };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(testo).then(fatto).catch(function () {});
-        } else {
-          var t = document.createElement('textarea');
-          t.value = testo; document.body.appendChild(t); t.select();
-          try { document.execCommand('copy'); fatto(); } catch (e) {}
-          document.body.removeChild(t);
+      // Modulo VERO: l'indirizzo viene inviato al nostro server. Funziona in qualsiasi browser,
+      // compresi quelli dentro Instagram e Facebook, dove i link "scrivi una mail" vengono
+      // ignorati (era quello a non funzionare).
+      (function () {
+        var URL_FUNZIONE = 'https://waxzrmlspgpuxvftzkvd.supabase.co/functions/v1/tester-signup';
+        var CHIAVE = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndheHpybWxzcGdwdXh2ZnR6a3ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5Mjc5MjksImV4cCI6MjA5NjUwMzkyOX0.J4vSIKgqDTjAQpSJb81kGD1Yhdrp0eyo_4y3yNcgiX0';
+        var modulo = document.getElementById('modulo');
+        var campo = document.getElementById('campo');
+        var invia = document.getElementById('invia');
+        var esito = document.getElementById('esito');
+
+        function mostra(testo, colore) {
+          esito.textContent = testo;
+          esito.style.color = colore;
+          esito.style.display = 'block';
         }
-      });
+
+        modulo.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var mail = (campo.value || '').trim();
+          if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(mail)) {
+            mostra('Controlla l’indirizzo: sembra incompleto.', '#B3261E');
+            return;
+          }
+          invia.disabled = true;
+          invia.textContent = 'Invio…';
+          fetch(URL_FUNZIONE, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              apikey: CHIAVE,
+              Authorization: 'Bearer ' + CHIAVE,
+            },
+            body: JSON.stringify({ email: mail, fonte: 'sito/android' }),
+          })
+            .then(function (r) {
+              return r.json().then(function (d) {
+                return { ok: r.ok, d: d };
+              });
+            })
+            .then(function (res) {
+              if (!res.ok) throw new Error((res.d && res.d.error) || 'Riprova tra poco.');
+              modulo.style.display = 'none';
+              mostra('Ci siamo! Ti mandiamo il link a breve. Grazie 💧', '#0B6B84');
+            })
+            .catch(function (err) {
+              invia.disabled = false;
+              invia.textContent = 'Mandami il link';
+              mostra(String((err && err.message) || 'Riprova tra poco.'), '#B3261E');
+            });
+        });
+      })();
     </script>
   </body>
 </html>

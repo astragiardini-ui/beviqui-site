@@ -61,10 +61,10 @@
     <p class="sub">Trova l'acqua pubblica gratis vicino a te. 💧<br />Gratis, senza registrazione.</p>
     <div class="btns">
       <!-- iOS: LIVE su App Store dal 28/06/2026 -->
-      <a id="ios" class="btn" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613" target="_blank" rel="noopener">📲 Scarica su App Store</a>
+      <a id="ios" class="btn" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:8px"><path d="M16.36 12.72c-.02-2.3 1.88-3.4 1.96-3.45-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.39 0 1.78.74 3 .72 1.24-.02 2.02-1.12 2.78-2.23.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.41-.93-2.43-3.7zM14.1 5.9c.63-.77 1.06-1.83.94-2.9-.91.04-2.01.61-2.66 1.37-.58.68-1.09 1.76-.95 2.8 1.01.08 2.04-.51 2.67-1.27z"/></svg>Scarica su App Store</a>
       <!-- Android: quando è sul Play Store, sostituire con:
            https://play.google.com/store/apps/details?id=com.beviqui.app -->
-      <a id="android" class="btn soon" href="/android/">🤖 Android — entra tra i primi</a>
+      <a id="android" class="btn soon" href="/android/"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:8px"><path d="M17.6 9.48l1.84-3.18a.38.38 0 00-.14-.52.38.38 0 00-.52.14l-1.86 3.22a11.4 11.4 0 00-9.84 0L5.22 5.92a.38.38 0 00-.52-.14.38.38 0 00-.14.52L6.4 9.48A10.8 10.8 0 001 18h22a10.8 10.8 0 00-5.4-8.52zM7 15.25a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2zm10 0a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2z"/></svg>Android — entra tra i primi</a>
     </div>
     <p class="note" id="note"></p>
     <a class="back" href="/">← Torna a beviqui.it</a>
@@ -83,5 +83,28 @@
       document.getElementById('note').textContent = 'La versione Android sta arrivando. Su iPhone la scarichi già dall’App Store.';
     }
   </script>
-</body>
+    <script>
+      // APRIRE L'APP STORE DAL BROWSER DI INSTAGRAM.
+      // Dentro Instagram/Facebook il link normale spesso resta prigioniero della finestrella e non
+      // arriva all'App Store. Lo schema di sistema "itms-apps://" invece viene passato a iOS, che
+      // apre l'App Store vero. Si prova quello e, se non succede nulla, si ripiega sul link normale.
+      (function () {
+        var IN_APP = /Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok/i.test(navigator.userAgent || '');
+        var HTTPS = 'https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613';
+        var SCHEMA = 'itms-apps://apps.apple.com/it/app/id6775767613';
+        if (!IN_APP) return; // browser normale: il link fa già il suo lavoro
+        document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function (a) {
+          a.addEventListener('click', function (e) {
+            e.preventDefault();
+            var andato = false;
+            var ripiego = setTimeout(function () { if (!andato) window.location.href = HTTPS; }, 900);
+            var uscito = function () { andato = true; clearTimeout(ripiego); };
+            document.addEventListener('visibilitychange', uscito, { once: true });
+            window.addEventListener('pagehide', uscito, { once: true });
+            window.location.href = SCHEMA;
+          });
+        });
+      })();
+    </script>
+  </body>
 </html>

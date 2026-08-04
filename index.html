@@ -45,7 +45,10 @@
     <!-- Browser dei social (Instagram/Facebook): lì i link "scrivi una mail" vengono ignorati e a
          volte l'App Store non si apre. Si avvisa come uscirne, che è l'unica cosa che risolve. -->
     <div id="ig-hint" style="display:none;background:#12303A;color:#fff;padding:12px 16px;font:600 14px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-align:center">
-      Stai usando il browser di Instagram. Per scaricare l'app tocca <strong>⋯</strong> in alto a destra e scegli <strong>«Apri in Safari»</strong> (o Chrome).
+      Stai usando il browser di Instagram: da qui l'App Store può non aprirsi.<br />
+      Tocca <strong>⋯</strong> in alto a destra → <strong>«Apri in Safari»</strong> (o Chrome).
+      <span id="ig-copia" style="display:inline-block;margin-top:8px;background:#FF6D00;color:#fff;padding:8px 14px;border-radius:10px;cursor:pointer">Copia il link del sito</span>
+      <span id="ig-copiato" style="display:none;margin-left:8px">Copiato ✓</span>
     </div>
     <script>
       (function () {
@@ -53,6 +56,19 @@
         if (/Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok/i.test(ua)) {
           var el = document.getElementById('ig-hint');
           if (el) el.style.display = 'block';
+          var btn = document.getElementById('ig-copia');
+          if (btn) btn.addEventListener('click', function () {
+            var url = 'https://beviqui.it';
+            var fatto = function () { var k = document.getElementById('ig-copiato'); if (k) k.style.display = 'inline'; };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(url).then(fatto).catch(function () {});
+            } else {
+              var t = document.createElement('textarea');
+              t.value = url; document.body.appendChild(t); t.select();
+              try { document.execCommand('copy'); fatto(); } catch (e) {}
+              document.body.removeChild(t);
+            }
+          });
         }
       })();
     </script>
@@ -110,7 +126,7 @@
         <div class="hero-body reveal">
           <p class="lead"><strong>BeviQui</strong> ti mostra sulla mappa le <strong>fontanelle</strong> e le <strong>case dell'acqua</strong> più vicine a te. Riempi la borraccia gratis, ovunque sei. Meno plastica, più leggerezza.</p>
           <div class="cta-row">
-            <a class="btn btn-primary btn-lg" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613" target="_blank" rel="noopener">Scarica l'app gratis</a>
+            <a class="btn btn-primary btn-lg" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613">Scarica l'app gratis</a>
             <a class="btn btn-ghost" href="#prova">Scaricala dal telefono</a>
           </div>
           <p class="microcopy">Gratis e senza registrazione · oltre <strong>12.000 fontanelle</strong> già sulla mappa in tutta Italia.</p>
@@ -198,8 +214,8 @@
           <p class="lead-light">BeviQui è già su iPhone: scaricala gratis dall'App Store. Su Android arriva presto: scrivimi e sei tra i primi. <strong>Inquadra il QR</strong> con la fotocamera del telefono e inizia subito a trovare l'acqua intorno a te.</p>
           <p class="microcopy light">Nessuna registrazione obbligatoria. Apri e usi tutto.</p>
           <div class="badges">
-            <a class="btn btn-light btn-lg" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613" target="_blank" rel="noopener">Scarica l'app</a>
-            <a class="btn btn-light btn-lg" href="/android/">Android — entra tra i primi</a>
+            <a class="btn btn-light btn-lg" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:8px"><path d="M16.36 12.72c-.02-2.3 1.88-3.4 1.96-3.45-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.39 0 1.78.74 3 .72 1.24-.02 2.02-1.12 2.78-2.23.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.41-.93-2.43-3.7zM14.1 5.9c.63-.77 1.06-1.83.94-2.9-.91.04-2.01.61-2.66 1.37-.58.68-1.09 1.76-.95 2.8 1.01.08 2.04-.51 2.67-1.27z"/></svg>iPhone — scarica l'app</a>
+            <a class="btn btn-light btn-lg" href="/android/"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:8px"><path d="M17.6 9.48l1.84-3.18a.38.38 0 00-.14-.52.38.38 0 00-.52.14l-1.86 3.22a11.4 11.4 0 00-9.84 0L5.22 5.92a.38.38 0 00-.52-.14.38.38 0 00-.14.52L6.4 9.48A10.8 10.8 0 001 18h22a10.8 10.8 0 00-5.4-8.52zM7 15.25a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2zm10 0a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2z"/></svg>Android — entra tra i primi</a>
           </div>
         </div>
         <div class="qr-wrap reveal">
@@ -380,5 +396,28 @@
       } catch (e) {}
     })();
   </script>
-</body>
+    <script>
+      // APRIRE L'APP STORE DAL BROWSER DI INSTAGRAM.
+      // Dentro Instagram/Facebook il link normale spesso resta prigioniero della finestrella e non
+      // arriva all'App Store. Lo schema di sistema "itms-apps://" invece viene passato a iOS, che
+      // apre l'App Store vero. Si prova quello e, se non succede nulla, si ripiega sul link normale.
+      (function () {
+        var IN_APP = /Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok/i.test(navigator.userAgent || '');
+        var HTTPS = 'https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613';
+        var SCHEMA = 'itms-apps://apps.apple.com/it/app/id6775767613';
+        if (!IN_APP) return; // browser normale: il link fa già il suo lavoro
+        document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function (a) {
+          a.addEventListener('click', function (e) {
+            e.preventDefault();
+            var andato = false;
+            var ripiego = setTimeout(function () { if (!andato) window.location.href = HTTPS; }, 900);
+            var uscito = function () { andato = true; clearTimeout(ripiego); };
+            document.addEventListener('visibilitychange', uscito, { once: true });
+            window.addEventListener('pagehide', uscito, { once: true });
+            window.location.href = SCHEMA;
+          });
+        });
+      })();
+    </script>
+  </body>
 </html>

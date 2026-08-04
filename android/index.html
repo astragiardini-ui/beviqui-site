@@ -46,8 +46,8 @@
         <h2>Come fare</h2>
         <ol class="steps">
           <li>Scrivi qui sotto la <strong>mail Google che usi sul telefono</strong>.</li>
-          <li>Ti mandiamo il link della prova.</li>
-          <li>Tocchi, installi, e sei dentro.</li>
+          <li>Ti abilitiamo l'accesso (di solito in poche ore).</li>
+          <li>Apri il link che compare qui sotto e installi l'app.</li>
         </ol>
 
         <form id="modulo" novalidate>
@@ -58,6 +58,15 @@
           <button type="submit" class="btn" id="invia">Mandami il link</button>
         </form>
         <p id="esito"></p>
+
+        <div id="dopo-invio" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid #DCE8EC">
+          <p class="hint" style="opacity:.95">
+            <strong>Ora tocca a te:</strong> apri questo link <strong>dal telefono Android</strong>
+            e tocca «Diventa un tester». Se dice che non sei tra i tester, riprova più tardi:
+            stiamo abilitando il tuo indirizzo.
+          </p>
+          <a class="btn" href="https://play.google.com/apps/testing/com.beviqui.app">Apri il link della prova</a>
+        </div>
       </div>
 
       <div class="card">
@@ -126,7 +135,9 @@
             .then(function (res) {
               if (!res.ok) throw new Error((res.d && res.d.error) || 'Riprova tra poco.');
               modulo.style.display = 'none';
-              mostra('Ci siamo! Ti mandiamo il link a breve. Grazie 💧', '#0B6B84');
+              mostra('Ci siamo, ti abbiamo registrato! 💧', '#0B6B84');
+              var box = document.getElementById('dopo-invio');
+              if (box) box.style.display = 'block';
             })
             .catch(function (err) {
               invia.disabled = false;

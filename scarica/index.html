@@ -70,57 +70,51 @@
     }
   </script>
       <script>
-      // AIUTO SOLO SE SERVE (non un banner fisso).
-      // Dentro Instagram/Facebook il tocco sull'App Store a volte non porta da nessuna parte: la
-      // pagina resta bianca perché quel browser non gestisce il passaggio all'App Store. Non lo
-      // forziamo (le scorciatoie note non funzionano più e sono contro le regole di Instagram):
-      // se dopo un attimo siamo ancora qui, compare un riquadro che spiega come uscire.
+      // DENTRO INSTAGRAM SI FERMA TUTTO.
+      // Il browser interno di Instagram non riesce ad aprire l'App Store: la pagina resta bianca e
+      // l'utente pensa che l'app non esista. Forzare l'uscita non e' possibile (le scorciatoie note
+      // non funzionano piu' e sono contro le regole di Instagram). L'unica cosa che possiamo fare
+      // noi e' fermarci qui e dire chiaramente come uscire.
       (function () {
         var ua = navigator.userAgent || '';
         if (!/Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok|Snapchat/i.test(ua)) return;
+        if (location.search.indexOf('continua=1') >= 0) return; // ha scelto di restare
 
-        var mostrato = false;
-        function mostraAiuto(indirizzo) {
-          if (mostrato) return;
-          mostrato = true;
-          var box = document.createElement('div');
-          box.setAttribute('style',
-            'position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;background:#12303A;color:#fff;' +
-            'padding:16px 18px;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.35);' +
-            "font:600 15px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-align:center");
-          box.innerHTML =
-            "Non si è aperto l'App Store?<br /><span style='font-weight:400;opacity:.9'>" +
-            "Tocca <strong>&#183;&#183;&#183;</strong> in alto a destra e scegli <strong>&laquo;Apri in Safari&raquo;</strong>.</span>";
-          var copia = document.createElement('button');
-          copia.textContent = "Copia il link dell'App Store";
-          copia.setAttribute('style',
-            'margin-top:12px;width:100%;background:#FF6D00;color:#fff;border:0;border-radius:12px;' +
-            'padding:12px 14px;font-weight:800;font-size:15px');
-          copia.onclick = function () {
-            var t = document.createElement('textarea');
-            t.value = indirizzo; document.body.appendChild(t); t.select();
-            try { document.execCommand('copy'); copia.textContent = 'Copiato ✓'; } catch (e) {}
-            document.body.removeChild(t);
-          };
-          var chiudi = document.createElement('button');
-          chiudi.textContent = 'Chiudi';
-          chiudi.setAttribute('style','margin-top:8px;width:100%;background:transparent;color:#9FC3CE;border:0;font-size:14px');
-          chiudi.onclick = function () { box.remove(); mostrato = false; };
-          box.appendChild(copia); box.appendChild(chiudi);
-          document.body.appendChild(box);
-        }
+        var iOS = /iPhone|iPad|iPod/i.test(ua);
+        var dove = iOS ? 'Safari' : 'Chrome';
+        var indirizzo = location.origin + location.pathname;
 
-        document.querySelectorAll('a[href^="https://apps.apple.com"]').forEach(function (a) {
-          a.addEventListener('click', function () {
-            // NON blocchiamo il link: parte normalmente (è un Universal Link, la via consigliata).
-            // Se dopo un attimo siamo ancora su questa pagina, vuol dire che non è partito.
-            var qui = true;
-            var uscito = function () { qui = false; };
-            document.addEventListener('visibilitychange', uscito, { once: true });
-            window.addEventListener('pagehide', uscito, { once: true });
-            setTimeout(function () { if (qui && !document.hidden) mostraAiuto(a.href); }, 1500);
-          });
-        });
+        var v = document.createElement('div');
+        v.setAttribute('style',
+          'position:fixed;inset:0;z-index:2147483647;background:#0B6B84;color:#fff;overflow:auto;' +
+          "display:flex;align-items:center;justify-content:center;padding:28px 22px;" +
+          "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif");
+        v.innerHTML =
+          '<div style="max-width:420px;text-align:center">' +
+            '<img src="/logo-mark.png" alt="" style="width:62px;height:62px;margin-bottom:16px" />' +
+            '<h2 style="font-size:24px;line-height:1.25;margin:0 0 10px">Apri in ' + dove + ' per scaricare l\'app</h2>' +
+            '<p style="margin:0 0 22px;opacity:.93;line-height:1.55;font-size:15px">' +
+              'Stai usando il browser dentro Instagram, che non riesce ad aprire l\'App Store.' +
+              '<br />Bastano due tocchi:</p>' +
+            '<div style="background:rgba(255,255,255,.12);border-radius:16px;padding:16px 18px;text-align:left;line-height:1.7;font-size:15px">' +
+              '<div><strong>1.</strong> Tocca <strong>&#183;&#183;&#183;</strong> in alto a destra</div>' +
+              '<div><strong>2.</strong> Scegli <strong>&laquo;Apri in ' + dove + '&raquo;</strong></div>' +
+            '</div>' +
+            '<button id="bq-copia" style="margin-top:18px;width:100%;background:#FF6D00;color:#fff;border:0;' +
+              'border-radius:14px;padding:15px 16px;font-weight:800;font-size:16px">Copia l\'indirizzo del sito</button>' +
+            '<p id="bq-ok" style="display:none;margin-top:10px;font-weight:800">Copiato ✓ — ora incollalo in ' + dove + '</p>' +
+            '<a href="?continua=1" style="display:inline-block;margin-top:20px;color:#BFE0EA;font-size:14px">' +
+              'Preferisco restare qui e guardare</a>' +
+          '</div>';
+        document.documentElement.appendChild(v);
+        document.body.style.overflow = 'hidden';
+
+        document.getElementById('bq-copia').onclick = function () {
+          var t = document.createElement('textarea');
+          t.value = indirizzo; document.body.appendChild(t); t.select();
+          try { document.execCommand('copy'); document.getElementById('bq-ok').style.display = 'block'; } catch (e) {}
+          document.body.removeChild(t);
+        };
       })();
     </script>
   </body>

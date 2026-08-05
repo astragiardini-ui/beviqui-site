@@ -158,53 +158,5 @@
         });
       })();
     </script>
-      <script>
-      // DENTRO INSTAGRAM SI FERMA TUTTO.
-      // Il browser interno di Instagram non riesce ad aprire l'App Store: la pagina resta bianca e
-      // l'utente pensa che l'app non esista. Forzare l'uscita non e' possibile (le scorciatoie note
-      // non funzionano piu' e sono contro le regole di Instagram). L'unica cosa che possiamo fare
-      // noi e' fermarci qui e dire chiaramente come uscire.
-      (function () {
-        var ua = navigator.userAgent || '';
-        if (!/Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok|Snapchat/i.test(ua)) return;
-        if (location.search.indexOf('continua=1') >= 0) return; // ha scelto di restare
-
-        var iOS = /iPhone|iPad|iPod/i.test(ua);
-        var dove = iOS ? 'Safari' : 'Chrome';
-        var indirizzo = location.origin + location.pathname;
-
-        var v = document.createElement('div');
-        v.setAttribute('style',
-          'position:fixed;inset:0;z-index:2147483647;background:#0B6B84;color:#fff;overflow:auto;' +
-          "display:flex;align-items:center;justify-content:center;padding:28px 22px;" +
-          "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif");
-        v.innerHTML =
-          '<div style="max-width:420px;text-align:center">' +
-            '<img src="/logo-mark.png" alt="" style="width:62px;height:62px;margin-bottom:16px" />' +
-            '<h2 style="font-size:24px;line-height:1.25;margin:0 0 10px">Apri in ' + dove + ' per scaricare l\'app</h2>' +
-            '<p style="margin:0 0 22px;opacity:.93;line-height:1.55;font-size:15px">' +
-              'Stai usando il browser dentro Instagram, che non riesce ad aprire l\'App Store.' +
-              '<br />Bastano due tocchi:</p>' +
-            '<div style="background:rgba(255,255,255,.12);border-radius:16px;padding:16px 18px;text-align:left;line-height:1.7;font-size:15px">' +
-              '<div><strong>1.</strong> Tocca <strong>&#183;&#183;&#183;</strong> in alto a destra</div>' +
-              '<div><strong>2.</strong> Scegli <strong>&laquo;Apri in ' + dove + '&raquo;</strong></div>' +
-            '</div>' +
-            '<button id="bq-copia" style="margin-top:18px;width:100%;background:#FF6D00;color:#fff;border:0;' +
-              'border-radius:14px;padding:15px 16px;font-weight:800;font-size:16px">Copia l\'indirizzo del sito</button>' +
-            '<p id="bq-ok" style="display:none;margin-top:10px;font-weight:800">Copiato ✓ — ora incollalo in ' + dove + '</p>' +
-            '<a href="?continua=1" style="display:inline-block;margin-top:20px;color:#BFE0EA;font-size:14px">' +
-              'Preferisco restare qui e guardare</a>' +
-          '</div>';
-        document.documentElement.appendChild(v);
-        document.body.style.overflow = 'hidden';
-
-        document.getElementById('bq-copia').onclick = function () {
-          var t = document.createElement('textarea');
-          t.value = indirizzo; document.body.appendChild(t); t.select();
-          try { document.execCommand('copy'); document.getElementById('bq-ok').style.display = 'block'; } catch (e) {}
-          document.body.removeChild(t);
-        };
-      })();
-    </script>
   </body>
 </html>

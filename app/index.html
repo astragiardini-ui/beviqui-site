@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scarica BeviQui</title>
+    <meta name="description" content="Scarica BeviQui: trovi le fontanelle d'acqua pubbliche più vicine a te. Gratis." />
+    <link rel="icon" href="/favicon.png" />
+    <meta property="og:title" content="Scarica BeviQui" />
+    <meta property="og:description" content="Trova l'acqua pubblica vicino a te. Gratis." />
+    <meta property="og:image" content="/og-image.png" />
+    <style>
+      * { box-sizing: border-box; margin: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+        background: linear-gradient(165deg, #12A2B4, #076078);
+        color: #fff; min-height: 100dvh; display: flex; align-items: center; justify-content: center;
+        padding: 32px 22px calc(32px + env(safe-area-inset-bottom));
+      }
+      .wrap { width: 100%; max-width: 400px; text-align: center; }
+      .logo { width: 78px; height: 78px; margin: 0 auto 18px; display: block; }
+      h1 { font-size: 30px; line-height: 1.15; margin-bottom: 10px; letter-spacing: -.4px; }
+      .sub { font-size: 16px; opacity: .93; line-height: 1.5; margin-bottom: 30px; }
+      .btn {
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        width: 100%; padding: 18px 18px; border-radius: 16px; text-decoration: none;
+        font-size: 17px; font-weight: 800; margin-bottom: 12px;
+        background: #fff; color: #0B4C5E; box-shadow: 0 6px 20px rgba(0,0,0,.18);
+      }
+      .btn:active { transform: scale(.985); }
+      .btn.hi { outline: 3px solid #FFD84D; outline-offset: 3px; }
+      .btn-and { background: #FF6D00; color: #fff; }
+      .nota { font-size: 13px; opacity: .85; margin-top: 18px; line-height: 1.5; }
+      .nota a { color: #fff; }
+      #ig { display: none; font-size: 13.5px; line-height: 1.5; background: rgba(0,0,0,.22);
+            border-radius: 12px; padding: 12px 14px; margin-bottom: 18px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <img class="logo" src="/logo-mark.png" alt="BeviQui" />
+      <h1>Scarica BeviQui</h1>
+      <p class="sub">Trovi le fontanelle d'acqua pubbliche più vicine a te. Gratis, e apri e usi subito.</p>
+
+      <!-- Avviso breve solo per chi arriva dai social: lì il passaggio allo store può non partire.
+           Una riga, non una schermata: non blocchiamo nessuno. -->
+      <div id="ig">Se toccando non si apre lo store: tocca <strong>&#183;&#183;&#183;</strong> in alto a destra → <strong>«Apri in Safari»</strong>.</div>
+
+      <a class="btn" id="ios" href="https://apps.apple.com/it/app/id6775767613">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M16.36 12.72c-.02-2.3 1.88-3.4 1.96-3.45-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.39 0 1.78.74 3 .72 1.24-.02 2.02-1.12 2.78-2.23.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.41-.93-2.43-3.7zM14.1 5.9c.63-.77 1.06-1.83.94-2.9-.91.04-2.01.61-2.66 1.37-.58.68-1.09 1.76-.95 2.8 1.01.08 2.04-.51 2.67-1.27z"/></svg>
+        iPhone — scarica dall'App Store
+      </a>
+
+      <a class="btn btn-and" id="android" href="/android/">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.38.38 0 00-.14-.52.38.38 0 00-.52.14l-1.86 3.22a11.4 11.4 0 00-9.84 0L5.22 5.92a.38.38 0 00-.52-.14.38.38 0 00-.14.52L6.4 9.48A10.8 10.8 0 001 18h22a10.8 10.8 0 00-5.4-8.52zM7 15.25a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2zm10 0a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2z"/></svg>
+        Android — entra tra i primi
+      </a>
+
+      <p class="nota">Nessuna registrazione: apri e usi tutto. · <a href="/">beviqui.it</a></p>
+    </div>
+
+    <script>
+      (function () {
+        var ua = navigator.userAgent || '';
+        // Evidenzia il pulsante del telefono che stai usando: meno da leggere, meno da sbagliare.
+        if (/iPhone|iPad|iPod/i.test(ua)) document.getElementById('ios').classList.add('hi');
+        if (/Android/i.test(ua)) document.getElementById('android').classList.add('hi');
+        // Dentro Instagram/Facebook lo store a volte non si apre: una riga per dire come uscire.
+        if (/Instagram|FBAN|FBAV|FB_IAB|TikTok|Snapchat|Line\//i.test(ua)) {
+          document.getElementById('ig').style.display = 'block';
+        }
+      })();
+    </script>
+  </body>
+</html>

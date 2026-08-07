@@ -60,15 +60,38 @@
     </div>
 
     <script>
+      // UN SOLO LINK CHE PORTA DOVE SERVE.
+      // Chi arriva da un browser normale viene mandato subito dove deve andare (App Store su
+      // iPhone, pagina Android sugli altri): un tocco solo, come dev'essere.
+      // ⚠️ Dentro Instagram/Facebook NON si rimbalza: lì il passaggio allo store spesso non parte e
+      // si finirebbe su una pagina bianca, senza nemmeno un pulsante da toccare. Meglio mostrare
+      // questa pagina, che i pulsanti ce li ha.
       (function () {
         var ua = navigator.userAgent || '';
-        // Evidenzia il pulsante del telefono che stai usando: meno da leggere, meno da sbagliare.
-        if (/iPhone|iPad|iPod/i.test(ua)) document.getElementById('ios').classList.add('hi');
-        if (/Android/i.test(ua)) document.getElementById('android').classList.add('hi');
-        // Dentro Instagram/Facebook lo store a volte non si apre: una riga per dire come uscire.
-        if (/Instagram|FBAN|FBAV|FB_IAB|TikTok|Snapchat|Line\//i.test(ua)) {
+        var iOS = /iPhone|iPad|iPod/i.test(ua);
+        var android = /Android/i.test(ua);
+        var dentroSocial = /Instagram|FBAN|FBAV|FB_IAB|TikTok|Snapchat|Line\//i.test(ua);
+        var resta = location.search.indexOf('resta=1') >= 0; // per vedere la pagina senza rimbalzo
+
+        // Evidenzia comunque il pulsante giusto: meno da leggere, meno da sbagliare.
+        if (iOS) document.getElementById('ios').classList.add('hi');
+        if (android) document.getElementById('android').classList.add('hi');
+
+        if (dentroSocial) {
           document.getElementById('ig').style.display = 'block';
+          return; // niente rimbalzo: qui servono i pulsanti
         }
+        if (resta) return;
+
+        // Browser normale: si va dritti.
+        if (iOS) {
+          location.replace('https://apps.apple.com/it/app/id6775767613');
+        } else if (android) {
+          // Su Google Play l'app non e' ancora pubblica: si manda alla pagina per entrare tra i
+          // primi. Quando esce, qui andra' l'indirizzo del Play Store.
+          location.replace('/android/');
+        }
+        // Da computer non si rimbalza: restano i due pulsanti.
       })();
     </script>
   </body>

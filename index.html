@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Fontanelle acqua potabile sulla mappa | BeviQui App</title>
   <meta name="description" content="Trova sulla mappa le fontanelle di acqua potabile pubbliche vicino a te, in tutta Italia. App gratis, senza registrazione né pubblicità." />
   <meta property="og:title" content="Fontanelle acqua potabile sulla mappa | BeviQui App" />
@@ -364,6 +364,41 @@
             if (!isNaN(tot) && tot > 0) { beviTotal = BEVI_BASE + tot; beviRetargetAll(); }
           }).catch(function () {});
       } catch (e) {}
+    })();
+  </script>
+
+  <!-- Barra "Scarica" sempre a portata: compare scrollando (mobile) e resta finche' scorri, cosi'
+       il modo di scaricare e' SEMPRE a un tocco. Su desktop resta nascosta (c'e' gia' il pulsante
+       nell'header). position:fixed (non sticky) perche' dentro i browser dei social lo sticky si
+       taglia; safe-area-inset per non finire sotto la barra home dell'iPhone. -->
+  <div id="dlbar" role="region" aria-label="Scarica BeviQui">
+    <a class="dlbar-btn" href="/app/">Scarica BeviQui — &egrave; gratis</a>
+  </div>
+  <style>
+    #dlbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+      padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));
+      background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+      box-shadow:0 -3px 18px rgba(0,0,0,.14);transform:translateY(130%);transition:transform .28s ease;}
+    #dlbar.show{transform:translateY(0);}
+    .dlbar-btn{display:block;text-align:center;min-height:48px;line-height:48px;border-radius:14px;
+      font-weight:800;font-size:17px;text-decoration:none;background:#12A2B4;color:#fff;
+      box-shadow:0 4px 14px rgba(18,162,180,.4);}
+    .dlbar-btn:active{transform:scale(.99);}
+    @media (max-width:820px){#dlbar{display:block;}body{padding-bottom:84px;}}
+  </style>
+  <script>
+    (function(){
+      var bar=document.getElementById('dlbar');
+      if(!bar) return;
+      var shown=false;
+      function onScroll(){
+        var y=window.pageYOffset||document.documentElement.scrollTop||0;
+        var mostra=y>Math.min(480, window.innerHeight*0.7); // dopo la prima schermata
+        if(mostra!==shown){shown=mostra;bar.classList.toggle('show',mostra);}
+      }
+      window.addEventListener('scroll',onScroll,{passive:true});
+      window.addEventListener('resize',onScroll,{passive:true});
+      onScroll();
     })();
   </script>
   </body>

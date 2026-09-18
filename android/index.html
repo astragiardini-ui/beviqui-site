@@ -83,6 +83,32 @@
         <p class="hint" id="hint-social" style="display:none">
           Non parte il download? Tocca <strong>&#8942;</strong> in alto a destra → <strong>«Apri in Chrome»</strong>.
         </p>
+
+        <!--
+          Aggiunto il 18/09/2026. Su Play BeviQui è in **test chiuso** (verificato in Play
+          Console: stato «Test chiusi»), quindi l'indirizzo pubblico del negozio risponde 404
+          e non va messo da nessuna parte. Questo invece è il link di adesione al test, che
+          risponde 200 e funziona una volta che l'indirizzo è nell'elenco.
+
+          Perché conta più dell'APK, e di parecchio:
+            · da Play l'app **si aggiorna da sola**. Chi installa l'APK resta fermo alla
+              versione che ha scaricato: `runtimeVersion` è a `policy: fingerprint`, e il
+              fingerprint della 1.1.8 è diverso da quello della 1.1.10, quindi gli
+              aggiornamenti non lo raggiungono;
+            · **solo chi entra da Play viene contato** fra i 12 tester che Google pretende
+              per 14 giorni prima di dare la produzione. Un APK passato a mano non conta
+              niente ai fini di quel cancello.
+        -->
+        <div class="passi" style="margin-top:14px">
+          <strong>Meglio ancora: entra dal Play Store.</strong><br />
+          Il file qui sopra è la versione di agosto. Dal Play Store hai <strong>l'ultima</strong>,
+          e l'app <strong>si aggiorna da sola</strong> come tutte le altre.<br />
+          Ti scriviamo appena il tuo indirizzo è nell'elenco — di solito in giornata.<br />
+          <a href="https://play.google.com/apps/testing/com.beviqui.app" style="font-weight:600">
+            Entra nel test su Google Play →
+          </a>
+        </div>
+
         <p class="canali" id="canali">Ti mandiamo il link anche via email.</p>
         <a class="back" href="/">← Torna a beviqui.it</a>
       </div>
@@ -94,7 +120,15 @@
 
     <script>
       (function () {
-        // Link diretto dell'APK (installazione immediata su Android, mentre l'app arriva sul Play Store).
+        // Link diretto dell'APK: serve a chi vuole provare SUBITO, senza aspettare di essere
+        // aggiunto all'elenco del test chiuso.
+        //
+        // ⚠️ È la **1.1.8 del 16/08/2026**, e non si aggiorna da sola: `runtimeVersion` è a
+        // `policy: fingerprint`, e il fingerprint della 1.1.8 (`8fca33c6…`) è diverso da quello
+        // della 1.1.10 (`fe8d908b…`), quindi gli aggiornamenti non la raggiungono.
+        // Rinfrescarla NON è immediato: le build `production` escono in formato `.aab`, che a
+        // mano non si installa. Servirebbe una build col profilo `preview` (`buildType: apk`).
+        // Per questo la strada buona è il test su Play, qui sotto: lì c'è già la 1.1.10.
         var APK = 'https://github.com/astragiardini-ui/beviqui-site/releases/download/android-apk-v1.1.8/BeviQui.apk';
         var URL_FN = 'https://waxzrmlspgpuxvftzkvd.supabase.co/functions/v1/tester-signup';
         var CHIAVE = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndheHpybWxzcGdwdXh2ZnR6a3ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5Mjc5MjksImV4cCI6MjA5NjUwMzkyOX0.J4vSIKgqDTjAQpSJb81kGD1Yhdrp0eyo_4y3yNcgiX0';

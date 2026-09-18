@@ -722,11 +722,21 @@
     <div class="intestazione appare" style="margin-bottom:0">
       <h2>Vuoi essere tra i primi?</h2>
       <p class="sottotitolo">Lasciaci la tua email: ti avvisiamo appena BeviQui arriva nella tua zona, con le nuove fontanelle vicino a te. Solo acqua buona.</p>
-      <form class="iscrizione" action="https://formspree.io/f/XXXXXXXX" method="POST">
-        <input type="email" name="email" placeholder="La tua email" required aria-label="La tua email">
-        <button class="bottone" type="submit">Avvisami</button>
+      <!--
+        ⚠️ Questo modulo inviava a `https://formspree.io/f/XXXXXXXX` — il segnaposto della
+        documentazione di Formspree, mai sostituito. Alla prova d'invio rispondeva
+        {"error":"Form not found"}: ogni email lasciata qui era PERSA, e chi la lasciava
+        finiva su una pagina d'errore. Corretto il 18/09/2026.
+
+        Ora invia alla stessa funzione che usa /android/ e che funziona. La funzione accetta
+        un campo `fonte`: qui vale `sito/home`, così questa lista d'attesa resta distinta dai
+        tester Android e non sporca il conto che serve a Google Play.
+      -->
+      <form class="iscrizione" id="modulo-avviso" novalidate>
+        <input type="email" id="email-avviso" name="email" placeholder="La tua email" required aria-label="La tua email">
+        <button class="bottone" type="submit" id="invia-avviso">Avvisami</button>
       </form>
-      <p class="fonte" style="margin-top:16px">Rispettiamo la tua privacy. Ti scriviamo solo quando conta.</p>
+      <p class="fonte" id="esito-avviso" style="margin-top:16px">Rispettiamo la tua privacy. Ti scriviamo solo quando conta.</p>
     </div>
   </div>
 </section>
@@ -883,6 +893,59 @@
       navigator.clipboard.writeText(location.href);
       document.getElementById('shareTxt').textContent = 'Link copiato! Ora incollalo dove vuoi.';
     }
+  });
+})();
+</script>
+
+<script>
+/* Iscrizione alla lista d'attesa della home.
+   Il modulo di prima inviava a un segnaposto di Formspree e le email si perdevano (vedi il
+   commento nella sezione «Vuoi essere tra i primi?»). Qui si usa la funzione che già regge
+   /android/. La chiave è la `anon` di Supabase: è pubblica per definizione, sta anche in
+   /android/, e da sola non apre nulla — l'archivio degli indirizzi è privato e ci scrive
+   solo la funzione, col suo ruolo di servizio. */
+(function () {
+  var URL_FN = 'https://waxzrmlspgpuxvftzkvd.supabase.co/functions/v1/tester-signup';
+  var CHIAVE = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndheHpybWxzcGdwdXh2ZnR6a3ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5Mjc5MjksImV4cCI6MjA5NjUwMzkyOX0.J4vSIKgqDTjAQpSJb81kGD1Yhdrp0eyo_4y3yNcgiX0';
+
+  var modulo = document.getElementById('modulo-avviso');
+  if (!modulo) return;
+  var campo = document.getElementById('email-avviso');
+  var bottone = document.getElementById('invia-avviso');
+  var esito = document.getElementById('esito-avviso');
+
+  function dì(testo, colore) {
+    esito.textContent = testo;
+    esito.style.color = colore || '';
+  }
+
+  modulo.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var mail = (campo.value || '').trim();
+    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(mail)) {
+      dì('Controlla l’email: sembra incompleta.', '#b3261e');
+      campo.focus();
+      return;
+    }
+    bottone.disabled = true;
+    var etichetta = bottone.textContent;
+    bottone.textContent = 'Un attimo…';
+    fetch(URL_FN, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: CHIAVE, Authorization: 'Bearer ' + CHIAVE },
+      body: JSON.stringify({ email: mail, fonte: 'sito/home' }),
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (!res.ok) throw new Error((res.d && res.d.error) || 'Riprova tra poco.');
+        modulo.style.display = 'none';
+        dì('Fatto! Ti avvisiamo appena BeviQui arriva nella tua zona. 💧', '');
+      })
+      .catch(function (er) {
+        bottone.disabled = false;
+        bottone.textContent = etichetta;
+        dì(er.message || 'Riprova tra poco.', '#b3261e');
+      });
   });
 })();
 </script>

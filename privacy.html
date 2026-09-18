@@ -74,7 +74,14 @@
     <ul>
       <li><strong>Supabase</strong> — backend e archiviazione dei contributi (database e foto). Server nell'<strong>Unione Europea</strong> (Francoforte). <a href="https://supabase.com/privacy">Privacy</a></li>
       <li><strong>Anthropic</strong> — analisi automatica (AI) delle foto per verifica e sfocatura di volti/targhe; opera negli <strong>USA</strong>. <a href="https://www.anthropic.com/legal/privacy">Privacy</a></li>
-      <li><strong>OpenStreetMap e CARTO</strong> — mappe e tile cartografiche. <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy">OSM</a> · <a href="https://carto.com/privacy/">CARTO</a></li>
+      <!--
+        Corretto il 18/09/2026: qui c'era scritto «OpenStreetMap e CARTO», ma le mappe non
+        arrivano più da CARTO da quando è caduto il watermark «API KEY REQUIRED» (commit
+        8fbb3378). Oggi il codice punta a tiles.openfreemap.org (ExploreScreen.tsx,
+        PositionEditor.tsx). Un'informativa che nomina un destinatario che non usiamo e tace
+        quello vero non è un dettaglio di stile: è il documento collegato alla scheda App Store.
+      -->
+      <li><strong>OpenStreetMap e OpenFreeMap</strong> — mappe e tile cartografiche. <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy">OSM</a> · <a href="https://openfreemap.org/">OpenFreeMap</a></li>
       <li><strong>Open-Meteo</strong> — dati meteo. <a href="https://open-meteo.com/en/terms">Open-Meteo</a></li>
     </ul>
     <p>Non vendiamo i tuoi dati e non li cediamo per finalità di marketing di terzi.</p>

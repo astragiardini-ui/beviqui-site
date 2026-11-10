@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Installa BeviQui su Android</title>
-    <meta name="description" content="Installa BeviQui su Android: lascia la tua email e la installi subito. Trova le fontanelle d'acqua pubbliche vicino a te. Gratis." />
+    <meta name="description" content="Installa BeviQui su Android da Google Play: gratis, in un tocco, e si aggiorna da sola. Trova le fontanelle d'acqua pubbliche vicino a te." />
     <link rel="icon" href="/favicon.png" />
     <style>
       * { box-sizing: border-box; margin: 0; }
@@ -18,7 +18,7 @@
       .logo { width: 84px; height: 84px; margin: 0 auto 18px; display: block;
               border-radius: 20px; box-shadow: 0 10px 28px rgba(0,0,0,.28); }
       h1 { font-size: 26px; line-height: 1.18; margin-bottom: 10px; letter-spacing: -.3px; font-weight: 800; }
-      .sub { font-size: 16px; opacity: .92; line-height: 1.5; margin-bottom: 28px; }
+      .sub { font-size: 16px; opacity: .92; line-height: 1.5; margin-bottom: 24px; }
       label { display: block; text-align: left; font-size: 14px; font-weight: 700; margin: 0 2px 6px; opacity: .96; }
       label span { opacity: .7; font-weight: 500; }
       .campo {
@@ -34,14 +34,22 @@
         background: #fff; color: #0B4C5E; box-shadow: 0 8px 22px rgba(0,0,0,.16);
         transition: transform .12s ease;
       }
+      .btn svg { flex: none; }
       .btn:active { transform: scale(.98); }
       .btn[disabled] { opacity: .6; }
+      .btn.secondario { background: rgba(255,255,255,.14); color: #fff; box-shadow: none; font-weight: 700; }
       #err { display: none; color: #FFE0D8; font-weight: 700; font-size: 14px; margin-top: 14px; }
       #ok { display: none; }
       .passi { text-align: left; background: rgba(255,255,255,.13); border-radius: 14px;
                padding: 15px 18px; margin: 18px 0 6px; font-size: 14.5px; line-height: 1.65; }
-      .canali { font-size: 14px; opacity: .92; line-height: 1.5; margin-top: 14px; }
       .hint { font-size: 12.5px; opacity: .8; margin-top: 12px; line-height: 1.5; }
+      .oppure { display: flex; align-items: center; gap: 12px; margin: 26px 0 16px; font-size: 13px; opacity: .8; }
+      .oppure::before, .oppure::after { content: ""; flex: 1; height: 1px; background: rgba(255,255,255,.35); }
+      details { text-align: left; }
+      details summary { list-style: none; cursor: pointer; }
+      details summary::-webkit-details-marker { display: none; }
+      details[open] summary .btn { margin-bottom: 16px; }
+      .canali { font-size: 14px; opacity: .92; line-height: 1.5; margin-top: 14px; }
       .nota { font-size: 12.5px; opacity: .76; margin-top: 22px; line-height: 1.5; }
       .nota a, .canali a { color: #fff; }
       .back { display: inline-block; margin-top: 20px; color: #fff; opacity: .85; font-size: 14px; }
@@ -51,88 +59,72 @@
     <div class="wrap">
       <img class="logo" src="/logo-mark.png" alt="BeviQui" />
 
-      <!-- STATO 1 — modulo -->
+      <!-- STATO 1: Google Play per primo, il modulo email/WhatsApp come via in più -->
       <div id="form-stato">
         <h1>Installa BeviQui su Android</h1>
-        <p class="sub">Lascia la tua email e la installi subito. È gratis.</p>
-        <form id="modulo" novalidate>
-          <label for="email">La tua email</label>
-          <input id="email" class="campo" type="email" inputmode="email" autocomplete="email"
-                 autocapitalize="off" spellcheck="false" placeholder="nome@email.com" required />
-          <div style="height:14px"></div>
-          <label for="wa">Il tuo WhatsApp <span>(facoltativo)</span></label>
-          <input id="wa" class="campo" type="tel" inputmode="tel" autocomplete="tel"
-                 placeholder="+39 333 123 4567" />
-          <p class="facolt">Se lo lasci, ti mandiamo il link anche su WhatsApp.</p>
-          <button type="submit" class="btn" id="invia">Ricevi il link e installa</button>
-        </form>
-        <p id="err"></p>
-      </div>
-
-      <!-- STATO 2 — ecco il link -->
-      <div id="ok">
-        <h1>Grazie! Ecco il tuo link 💧</h1>
-        <p class="sub">Tocca qui sotto e installa BeviQui sul telefono.</p>
-        <a class="btn" id="installa" href="#">⬇&#65038;&nbsp; Installa BeviQui adesso</a>
+        <p class="sub">BeviQui è su Google Play: la installi gratis in un tocco e si aggiorna da sola.</p>
+        <!--
+          Dal 21/10/2026 BeviQui è PUBBLICA su Google Play (produzione, tutti i Paesi). Il link
+          allo store sostituisce l'APK di agosto (1.1.8) e il link di adesione al test chiuso,
+          che qui stavano prima: l'APK restava fermo alla versione scaricata (runtimeVersion a
+          policy fingerprint, gli aggiornamenti non lo raggiungevano) e il test chiuso non esiste
+          più. Aggiornato il 09/11/2026.
+        -->
+        <a class="btn" id="play" href="https://play.google.com/store/apps/details?id=com.beviqui.app">
+          <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1 9.3-9.3v-.2L3.7 2.2l-.1.1z"/><path d="M16.1 15.6l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.7 2.1-.1-.1z"/><path d="M16.2 15.5L13 12.3 3.6 21.7c.3.4.9.4 1.6 0l11-6.2"/><path d="M16.2 9.1l-11-6.2c-.6-.4-1.2-.3-1.6 0L13 12.3l3.2-3.2z"/></svg>
+          Apri Google Play
+        </a>
         <div class="passi">
           <strong>Come si installa (30 secondi):</strong><br />
-          1. Tocca <strong>Installa BeviQui adesso</strong> → parte il download.<br />
-          2. Apri il file scaricato.<br />
-          3. Se il telefono lo chiede, tocca <strong>Consenti / Installa comunque</strong>.
+          1. Tocca <strong>Apri Google Play</strong>.<br />
+          2. Tocca <strong>Installa</strong>.<br />
+          3. Apri BeviQui: la fontanella più vicina è già sulla mappa.
         </div>
         <p class="hint" id="hint-social" style="display:none">
-          Non parte il download? Tocca <strong>&#8942;</strong> in alto a destra → <strong>«Apri in Chrome»</strong>.
+          Google Play resta fermo? Tocca <strong>&#8942;</strong> in alto a destra → <strong>«Apri in Chrome»</strong>.
         </p>
 
-        <!--
-          Aggiunto il 18/09/2026. Su Play BeviQui è in **test chiuso** (verificato in Play
-          Console: stato «Test chiusi»), quindi l'indirizzo pubblico del negozio risponde 404
-          e non va messo da nessuna parte. Questo invece è il link di adesione al test, che
-          risponde 200 e funziona una volta che l'indirizzo è nell'elenco.
+        <div class="oppure">oppure</div>
+        <details>
+          <summary><span class="btn secondario">Mandami il link sul telefono</span></summary>
+          <form id="modulo" novalidate>
+            <label for="email">La tua email</label>
+            <input id="email" class="campo" type="email" inputmode="email" autocomplete="email"
+                   autocapitalize="off" spellcheck="false" placeholder="nome@email.com" required />
+            <div style="height:14px"></div>
+            <label for="wa">Il tuo WhatsApp <span>(facoltativo)</span></label>
+            <input id="wa" class="campo" type="tel" inputmode="tel" autocomplete="tel"
+                   placeholder="+39 333 123 4567" />
+            <p class="facolt">Se lo lasci, ti mandiamo il link anche su WhatsApp, in orario di lavoro.</p>
+            <button type="submit" class="btn" id="invia">Ricevi il link</button>
+          </form>
+          <p id="err"></p>
+        </details>
+      </div>
 
-          Perché conta più dell'APK, e di parecchio:
-            · da Play l'app **si aggiorna da sola**. Chi installa l'APK resta fermo alla
-              versione che ha scaricato: `runtimeVersion` è a `policy: fingerprint`, e il
-              fingerprint della 1.1.8 è diverso da quello della 1.1.10, quindi gli
-              aggiornamenti non lo raggiungono;
-            · **solo chi entra da Play viene contato** fra i 12 tester che Google pretende
-              per 14 giorni prima di dare la produzione. Un APK passato a mano non conta
-              niente ai fini di quel cancello.
-        -->
-        <div class="passi" style="margin-top:14px">
-          <strong>Meglio ancora: entra dal Play Store.</strong><br />
-          Il file qui sopra è la versione di agosto. Dal Play Store hai <strong>l'ultima</strong>,
-          e l'app <strong>si aggiorna da sola</strong> come tutte le altre.<br />
-          Ti scriviamo appena il tuo indirizzo è nell'elenco — di solito in giornata.<br />
-          <a href="https://play.google.com/apps/testing/com.beviqui.app" style="font-weight:600">
-            Entra nel test su Google Play →
-          </a>
-        </div>
-
-        <p class="canali" id="canali">Ti mandiamo il link anche via email.</p>
+      <!-- STATO 2: link in arrivo -->
+      <div id="ok">
+        <h1>Fatto, il link è in arrivo</h1>
+        <p class="sub" id="canali">Te lo mandiamo via email.</p>
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.beviqui.app">
+          <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1 9.3-9.3v-.2L3.7 2.2l-.1.1z"/><path d="M16.1 15.6l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.7 2.1-.1-.1z"/><path d="M16.2 15.5L13 12.3 3.6 21.7c.3.4.9.4 1.6 0l11-6.2"/><path d="M16.2 9.1l-11-6.2c-.6-.4-1.2-.3-1.6 0L13 12.3l3.2-3.2z"/></svg>
+          Apri Google Play adesso
+        </a>
+        <p class="hint">Intanto puoi installarla da qui: è lo stesso link che ti arriva.</p>
         <a class="back" href="/">← Torna a beviqui.it</a>
       </div>
 
-      <p class="nota">Usiamo l'email solo per darti il link e il tuo accesso; il numero, se lo lasci,
-        solo per mandarti il link su WhatsApp. Niente pubblicità, non li cediamo a nessuno.
+      <p class="nota">Usiamo l'email solo per mandarti il link; il numero, se lo lasci, solo per il messaggio
+        su WhatsApp. Niente pubblicità, non li cediamo a nessuno.
         <a href="/privacy.html">Privacy</a>.</p>
+      <p class="nota" style="margin-top:10px">BeviQui · Astra Gardens di Guizzardi Francesco · Via Passere 2, 25020 Flero (BS) · P.IVA 04489190985</p>
     </div>
-
     <script>
       (function () {
-        // Link diretto dell'APK: serve a chi vuole provare SUBITO, senza aspettare di essere
-        // aggiunto all'elenco del test chiuso.
-        //
-        // ⚠️ È la **1.1.8 del 16/08/2026**, e non si aggiorna da sola: `runtimeVersion` è a
-        // `policy: fingerprint`, e il fingerprint della 1.1.8 (`8fca33c6…`) è diverso da quello
-        // della 1.1.10 (`fe8d908b…`), quindi gli aggiornamenti non la raggiungono.
-        // Rinfrescarla NON è immediato: le build `production` escono in formato `.aab`, che a
-        // mano non si installa. Servirebbe una build col profilo `preview` (`buildType: apk`).
-        // Per questo la strada buona è il test su Play, qui sotto: lì c'è già la 1.1.10.
-        var APK = 'https://github.com/astragiardini-ui/beviqui-site/releases/download/android-apk-v1.1.8/BeviQui.apk';
         var URL_FN = 'https://waxzrmlspgpuxvftzkvd.supabase.co/functions/v1/tester-signup';
+        // Chiave `anon` di Supabase: pubblica per definizione, da sola non apre nulla (l'archivio
+        // degli indirizzi è privato e ci scrive solo la funzione lato server).
         var CHIAVE = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndheHpybWxzcGdwdXh2ZnR6a3ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5Mjc5MjksImV4cCI6MjA5NjUwMzkyOX0.J4vSIKgqDTjAQpSJb81kGD1Yhdrp0eyo_4y3yNcgiX0';
-
         var modulo = document.getElementById('modulo');
         var email = document.getElementById('email');
         var wa = document.getElementById('wa');
@@ -140,15 +132,11 @@
         var err = document.getElementById('err');
         var formStato = document.getElementById('form-stato');
         var ok = document.getElementById('ok');
-        var installa = document.getElementById('installa');
         var canali = document.getElementById('canali');
-        installa.setAttribute('href', APK);
-
-        // Dentro Instagram/Facebook il download può non partire: mostro il trucco "apri in Chrome".
+        // Dentro Instagram/Facebook il passaggio a Google Play a volte resta fermo: mostro il trucco "apri in Chrome".
         var dentroSocial = /Instagram|FBAN|FBAV|FB_IAB|TikTok|Snapchat|Line\//i.test(navigator.userAgent || '');
-
+        if (dentroSocial) document.getElementById('hint-social').style.display = 'block';
         function mostraErr(t) { err.textContent = t; err.style.display = 'block'; }
-
         modulo.addEventListener('submit', function (e) {
           e.preventDefault();
           err.style.display = 'none';
@@ -170,15 +158,14 @@
               if (!res.ok) throw new Error((res.d && res.d.error) || 'Riprova tra poco.');
               formStato.style.display = 'none';
               ok.style.display = 'block';
-              if (dentroSocial) document.getElementById('hint-social').style.display = 'block';
-              canali.innerHTML = tel
-                ? 'Ti mandiamo il link anche via <strong>email</strong> e su <strong>WhatsApp</strong> 💧'
-                : 'Ti mandiamo il link anche via <strong>email</strong> 💧';
+              canali.textContent = tel
+                ? 'Te lo mandiamo via email e su WhatsApp, in orario di lavoro.'
+                : 'Te lo mandiamo via email.';
               window.scrollTo(0, 0);
             })
             .catch(function (er) {
               invia.disabled = false;
-              invia.textContent = 'Ricevi il link e installa';
+              invia.textContent = 'Ricevi il link';
               mostraErr(String((er && er.message) || 'Riprova tra poco.'));
             });
         });

@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Scarica BeviQui — l'app dell'acqua pubblica gratis</title>
-  <meta name="description" content="Scarica BeviQui: trova fontanelle e acqua pubblica gratis vicino a te. Su iPhone dall'App Store. Gratis, senza registrazione." />
+  <meta name="description" content="Scarica BeviQui: trova fontanelle e acqua pubblica gratis vicino a te. Su iPhone dall'App Store, su Android da Google Play. Gratis, senza registrazione." />
   <meta name="robots" content="index,follow" />
   <link rel="icon" href="/favicon.png" />
   <meta property="og:title" content="Scarica BeviQui" />
-  <meta property="og:description" content="Trova l'acqua pubblica gratis vicino a te. Su iPhone dall'App Store." />
+  <meta property="og:description" content="Trova l'acqua pubblica gratis vicino a te. Su iPhone dall'App Store, su Android da Google Play." />
   <meta property="og:image" content="/og-image.png" />
   <style>
     :root { --teal: #0E7C86; --teal-dark: #0a5e66; --ink: #0f2a2d; }
@@ -48,9 +48,8 @@
     <div class="btns">
       <!-- iOS: LIVE su App Store dal 28/06/2026 -->
       <a id="ios" class="btn" href="https://apps.apple.com/it/app/beviqui-fontanelle-e-acqua/id6775767613"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:8px"><path d="M16.36 12.72c-.02-2.3 1.88-3.4 1.96-3.45-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.39 0 1.78.74 3 .72 1.24-.02 2.02-1.12 2.78-2.23.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.41-.93-2.43-3.7zM14.1 5.9c.63-.77 1.06-1.83.94-2.9-.91.04-2.01.61-2.66 1.37-.58.68-1.09 1.76-.95 2.8 1.01.08 2.04-.51 2.67-1.27z"/></svg>Scarica su App Store</a>
-      <!-- Android: quando è sul Play Store, sostituire con:
-           https://play.google.com/store/apps/details?id=com.beviqui.app -->
-      <a id="android" class="btn soon" href="/android/"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:8px"><path d="M17.6 9.48l1.84-3.18a.38.38 0 00-.14-.52.38.38 0 00-.52.14l-1.86 3.22a11.4 11.4 0 00-9.84 0L5.22 5.92a.38.38 0 00-.52-.14.38.38 0 00-.14.52L6.4 9.48A10.8 10.8 0 001 18h22a10.8 10.8 0 00-5.4-8.52zM7 15.25a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2zm10 0a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2z"/></svg>Android — entra tra i primi</a>
+      <!-- Android: PUBBLICA su Google Play dal 21/10/2026 -->
+      <a id="android" class="btn" href="https://play.google.com/store/apps/details?id=com.beviqui.app"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:8px"><path d="M17.6 9.48l1.84-3.18a.38.38 0 00-.14-.52.38.38 0 00-.52.14l-1.86 3.22a11.4 11.4 0 00-9.84 0L5.22 5.92a.38.38 0 00-.52-.14.38.38 0 00-.14.52L6.4 9.48A10.8 10.8 0 001 18h22a10.8 10.8 0 00-5.4-8.52zM7 15.25a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2zm10 0a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2z"/></svg>Scarica su Google Play</a>
     </div>
     <p class="note" id="note"></p>
     <a class="back" href="/">← Torna a beviqui.it</a>
@@ -66,7 +65,7 @@
     }
     if (isAnd) {
       document.getElementById('android').classList.add('hi');
-      document.getElementById('note').textContent = 'La versione Android sta arrivando. Su iPhone la scarichi già dall’App Store.';
+      document.getElementById('note').textContent = 'Disponibile su Google Play per Android.';
     }
   </script>
   </body>
